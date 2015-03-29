@@ -74,7 +74,7 @@ public class MovieManager {
 	public Movie readMovie(String movieId)
 	{
 		Movie movie = new Movie();
-		String sql = "select * from movie where id = ?";
+		String sql = "select * from movie where id = movieId";
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet results = statement.executeQuery();
@@ -116,6 +116,7 @@ public class MovieManager {
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, movieId);
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
