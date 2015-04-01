@@ -71,7 +71,7 @@ public class ActorManager {
 	public Actor readActor(int id)
 	{
 		Actor actor = new Actor();
-		String sql = "select * from actor where id = ?";
+		String sql = "select * from actor where id = id";
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet results = statement.executeQuery();
@@ -93,13 +93,12 @@ public class ActorManager {
 	public void updateActor(String actorId, Actor actor)
 	{
 		String sql = "update actor set firstName =?"
-				+ ", lastName = ?, dateOfBirth =? where id = ?";
+				+ ", lastName = ?, dateOfBirth =? where id = actorId";
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, actor.getId());
-			statement.setString(2, actor.getFirstName());
-			statement.setString(3, actor.getLastName());
-			statement.setString(4, actorId);
+			statement.setString(1, actor.getFirstName());
+			statement.setString(2, actor.getLastName());
+			statement.setString(3, actorId);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

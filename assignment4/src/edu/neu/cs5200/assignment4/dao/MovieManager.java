@@ -95,13 +95,12 @@ public class MovieManager {
 	public void updateMovie(String movieId, Movie movie)
 	{
 		String sql = "update movie set title =?"
-				+ ", posterImage = ?, releaseDate = ?, where id = ?";
+				+ ", posterImage = ?, releaseDate = ?, where id = movieId";
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, movie.getId());
-			statement.setString(2, movie.getTitle());
-			statement.setString(3, movie.getPosterimage());
-			statement.setString(4, movie.getReleaseDate());
+			statement.setString(1, movie.getTitle());
+			statement.setString(2, movie.getPosterimage());
+			statement.setString(3, movie.getReleaseDate());
 			statement.executeUpdate();
 			
 		} catch (SQLException e) {

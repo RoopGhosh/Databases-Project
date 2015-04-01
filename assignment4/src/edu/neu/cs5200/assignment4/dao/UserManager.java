@@ -86,7 +86,7 @@ public class UserManager {
 			if(results.next())
 			{
 				user.setUsername(username);
-				user.setUsername(results.getString("password"));
+				user.setPassword(results.getString("password"));
 				user.setFirstName(results.getString("firstName"));
 				user.setLastName(results.getString("lastName"));
 				user.setEmail(results.getString("email"));
@@ -106,12 +106,13 @@ public class UserManager {
 				+ "dateofBirth = ? , where id = ?";
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(6, username);
+			
 			statement.setString(1, user.getPassword());
 			statement.setString(2, user.getFirstName());
 			statement.setString(3, user.getLastName());
 			statement.setString(4, user.getEmail());
 			statement.setDate(5, user.getDateofBirth());
+			statement.setString(6, username);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

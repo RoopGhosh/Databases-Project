@@ -48,7 +48,7 @@ public class CommentManager {
 	public List<Comment> readAllComments()
 	{
 		List<Comment> comments = new ArrayList<Comment>();
-		String sql = "select comment from comment";
+		String sql = "select * from comment";
 		PreparedStatement statement;
 		try {
 			statement = conn.prepareStatement(sql);
@@ -56,7 +56,10 @@ public class CommentManager {
 			while (results.next())
 			{
 				Comment comment = new Comment();
-				comment.setComment((results.getString("comment")));
+				comment.setComment(results.getString("comment"));
+				comment.setComment(results.getString("releasedate"));
+				comment.setComment(results.getString("comment2movie"));
+				comment.setComment(results.getString("comment2actor"));
 				comments.add(comment);
 			}
 		} catch (SQLException e) {
@@ -68,7 +71,7 @@ public class CommentManager {
 	public List<Comment> readAllCommentsForUsername(String username)
 	{
 			List<Comment> comments = new ArrayList<Comment>();
-			String sql = "select comment from comment where comment2user = username";
+			String sql = "select * from comment where comment2user = username";
 			PreparedStatement statement;
 		try {
 			statement = conn.prepareStatement(sql);
@@ -76,7 +79,10 @@ public class CommentManager {
 			while (results.next())
 			{
 				Comment comment = new Comment();
-				comment.setComment((results.getString("comment")));
+				comment.setComment(results.getString("comment"));
+				comment.setComment(results.getString("releasedate"));
+				comment.setComment(results.getString("comment2movie"));
+				comment.setComment(results.getString("comment2actor"));
 				comments.add(comment);
 			}
 		} catch (SQLException e) {
@@ -89,7 +95,7 @@ public class CommentManager {
 	public List<Comment> readAllCommentsForMovie(String movieId)
 	{
 		List<Comment> comments = new ArrayList<Comment>();
-		String sql = "select comment from comment where comment2movie = movieId";
+		String sql = "select * from comment where comment2movie = movieId";
 		PreparedStatement statement;
 	try {
 		statement = conn.prepareStatement(sql);
@@ -97,7 +103,10 @@ public class CommentManager {
 		while (results.next())
 		{
 			Comment comment = new Comment();
-			comment.setComment((results.getString("comment")));
+			comment.setComment(results.getString("comment"));
+			comment.setComment(results.getString("releasedate"));
+			comment.setComment(results.getString("comment2movie"));
+			comment.setComment(results.getString("comment2actor"));
 			comments.add(comment);
 		}
 	} catch (SQLException e) {
@@ -117,10 +126,10 @@ public class CommentManager {
 		ResultSet results = statement.executeQuery();
 		if(results.next())
 			{
-			comment.setComment (results.getString(1));
-			comment.setComment (results.getString(2));
-			comment.setComment (results.getString(3));
-			comment.setComment (results.getString(4));
+			comment.setComment(results.getString("comment"));
+			comment.setComment(results.getString("releasedate"));
+			comment.setComment(results.getString("comment2movie"));
+			comment.setComment(results.getString("comment2actor"));
 			}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block

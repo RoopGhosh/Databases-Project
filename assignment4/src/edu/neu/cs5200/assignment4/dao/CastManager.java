@@ -72,7 +72,7 @@ public class CastManager {
 	public List<Cast> readAllCastForActor(String actorId)
 	{
 		List<Cast> casts = new ArrayList<Cast>();
-		String sql = "select cast from cast where cast2actor = actorId";
+		String sql = "select * from cast where cast2actor = actorId";
 		PreparedStatement statement;
 	try {
 		statement = conn.prepareStatement(sql);
@@ -80,7 +80,9 @@ public class CastManager {
 		while (results.next())
 		{
 			Cast cast = new Cast();
-			cast.setCharecterString((results.getString("charecterstring")));
+			cast.setCharecterString(results.getString("charecterString"));
+			cast.setCast2actor(results.getString("cast2movie"));
+			cast.setCast2movie(results.getString("cast2actor"));
 			casts.add(cast);
 		}
 	} catch (SQLException e) {
@@ -93,7 +95,7 @@ public class CastManager {
 	public List<Cast> readAllCastForMovie(String movieId)
 	{
 		List<Cast> casts = new ArrayList<Cast>();
-		String sql = "select cast from cast where cast2movie = movieId";
+		String sql = "select * from cast where cast2movie = movieId";
 		PreparedStatement statement;
 	try {
 		statement = conn.prepareStatement(sql);
@@ -101,7 +103,9 @@ public class CastManager {
 		while (results.next())
 		{
 			Cast cast = new Cast();
-			cast.setCharecterString((results.getString("charecterstring")));
+			cast.setCharecterString(results.getString("charecterString"));
+			cast.setCast2actor(results.getString("cast2movie"));
+			cast.setCast2movie(results.getString("cast2actor"));
 			casts.add(cast);
 		}
 	} catch (SQLException e) {
@@ -114,7 +118,7 @@ public class CastManager {
 	public Cast readCastForId(String castId)
 	{
 		Cast cast = new Cast();
-		String sql = "select * from cast where charecterstring = ?";
+		String sql = "select * from cast where charecterstring = castId";
 		try {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet results = statement.executeQuery();
@@ -134,12 +138,10 @@ public class CastManager {
 	public void updateCast(String castId, Cast newCast)
 	{
 		Cast cast = new Cast();
-		String sql = "update cast set cast = ? where cast = ?";
+		String sql = "update cast set cast = ? where cast = castId";
 		try{
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1,castId);
-			statement.setString(2, cast.getCast2movie());
-			statement.setString(3, cast.getCast2actor());
+			statement.setString(1,cast.getCharecterString());
 			statement.executeUpdate();
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
