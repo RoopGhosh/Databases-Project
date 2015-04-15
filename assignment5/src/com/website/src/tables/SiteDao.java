@@ -37,17 +37,17 @@ public class SiteDao
 		return (List<Site>)query.getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	@PUT
-	@Path("/site/{id}")
+	@Path("/site")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Site> updateSite(@PathParam("id")int siteId, Site site)
+	public List<Site> updateSite(Site site)
 	{
 //		Query query = em.createQuery("update site SET Site site WHERE Id = siteId");
 
 		em.getTransaction().begin();
-		Site thissite = em.find(Site.class, siteId);
+		Site thissite = em.find(Site.class, site.getId());
 		thissite = em.merge(site);
 		em.getTransaction().commit();
 		Query query = em.createQuery("select site from Site site");
@@ -55,9 +55,19 @@ public class SiteDao
 	}
 	
 	@DELETE
-	@Path("/site/{id}")
+	@Path("/site")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Site> removeSite(@PathParam("id")int siteId) 
+	public List<Site> deleteSite(Site site) 
+	{
+		em.getTransaction().begin();
+		em.remove(site);
+		em.getTransaction().commit();
+		Query query = em.createQuery("select site from Site site");
+		return (List<Site>)query.getResultList();
+	}
+	
+	public List<Site> removeSite(int siteId) 
 	{
 		em.getTransaction().begin();
 		Site site = em.find(Site.class, siteId);
@@ -66,6 +76,8 @@ public class SiteDao
 		Query query = em.createQuery("select site from Site site");
 		return (List<Site>)query.getResultList();
 	}
+	
+	
 	
 	@POST
 	@Path("/site")
