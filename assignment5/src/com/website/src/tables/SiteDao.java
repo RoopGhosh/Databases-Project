@@ -7,11 +7,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.*;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,17 +37,18 @@ public class SiteDao
 		return (List<Site>)query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@PUT
-	@Path("/site")
+	@Path("/site/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Site> updateSite(int siteId, Site site)
+	public List<Site> updateSite(@PathParam("id")int siteId, Site site)
 	{
 //		Query query = em.createQuery("update site SET Site site WHERE Id = siteId");
 
 		em.getTransaction().begin();
 		Site thissite = em.find(Site.class, siteId);
-		em.merge(site);
+		thissite = em.merge(site);
 		em.getTransaction().commit();
 		Query query = em.createQuery("select site from Site site");
 		return (List<Site>)query.getResultList();
