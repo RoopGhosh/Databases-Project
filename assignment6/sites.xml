@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<siteList>
+    <site name="Site 1" latitude="12.23" longitude="23.34">
+        <id>1</id>
+    </site>
+    <site name="Site 2" latitude="21.32" longitude="43.54">
+        <id>2</id>
+    </site>
+</siteList>
