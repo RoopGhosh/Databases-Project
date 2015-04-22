@@ -1,17 +1,34 @@
 package com.website.src.tables;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(value = XmlAccessType.FIELD)
 public class Equipment {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private String brand;
+	@XmlAttribute
 	private String description;
+	@XmlAttribute
 	private Integer price;
-	private Integer towerId;
+	//private Integer towerId;
+	@ManyToOne
+	@JoinColumn(name="towerId")
+	@XmlTransient
+	private Tower tower;
 	public Integer getId() {
 		return id;
 	}
@@ -42,23 +59,23 @@ public class Equipment {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public Integer getTowerId() {
-		return towerId;
+	public Tower getTower() {
+		return tower;
 	}
-	public void setTowerId(Integer towerId) {
-		this.towerId = towerId;
+	public void setTower(Tower tower) {
+		this.tower = tower;
 	}
 	public Equipment(Integer id, String name, String brand, String description,
-			Integer price, Integer towerId) {
+			Integer price, Tower tower) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.brand = brand;
 		this.description = description;
 		this.price = price;
-		this.towerId = towerId;
+		this.tower = tower;
 	}
 	public Equipment() {
 		super();
 	}
-}
+		}

@@ -89,9 +89,9 @@ public class SiteDAO{
 		SiteList theSites = new SiteList();
 		theSites.setSiteList(sites);
 		
-		dao.exportDirectorsToXmlFile(theSites, "sites.xml");
+		dao.exportDirectorsToXmlFile(theSites, "xml/sites.xml");
 		
 		dao.convertXmlFileToOutputFile("xml/sites.xml", "xml/sites.html", "xml/sites2html.xslt");
-		//dao.convertXmlFileToOutputFile("xml/towers.xml", "xml/towers.html", "xml/sites2towers.xslt");
+		dao.convertXmlFileToOutputFile("xml/sites.xml", "xml/equipments.html", "xml/sites2equipment.xslt");
 	}
 }

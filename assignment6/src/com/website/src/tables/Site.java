@@ -18,6 +18,7 @@ public class Site{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@XmlAttribute
 	private Integer id;
 	@XmlAttribute
 	private String name;
@@ -25,7 +26,9 @@ public class Site{
 	private String latitude;
 	@XmlAttribute
 	private String longitude;
-
+	@OneToMany(mappedBy="site", cascade=CascadeType.ALL, orphanRemoval=true)
+	@XmlElement(name="tower")
+	private List<Tower> towers;
 	public Integer getId() {
 		return id;
 	}
@@ -50,14 +53,22 @@ public class Site{
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
-	public Site(Integer id, String name, String latitude, String longitude) {
+	public List<Tower> getTowers() {
+		return towers;
+	}
+	public void setTowers(List<Tower> towers) {
+		this.towers = towers;
+	}
+	public Site(Integer id, String name, String latitude, String longitude,
+			List<Tower> towers) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.towers = towers;
 	}
 	public Site() {
 		super();
 	}
-}
+	}

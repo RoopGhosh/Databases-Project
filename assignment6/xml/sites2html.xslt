@@ -10,17 +10,13 @@
 		<xsl:for-each select="siteList/site">
 			<li>
 				<xsl:value-of select="@name"/>	
-				<xsl:text>, </xsl:text>
-				<xsl:value-of select="@latitude"/>
-				<xsl:text>, </xsl:text>
-				<xsl:value-of select="@longitude"/>
+				
 				<ul>
-					<xsl:for-each select="id">
-						<!-- <li>
+					<xsl:for-each select="tower">
+						<li>
 							<xsl:value-of select="@name"/>
-							<xsl:text>, </xsl:text>
-							<xsl:value-of select="@stars"/>
-						</li> -->
+							
+						</li>
 					</xsl:for-each>
 				</ul>
 			</li>
