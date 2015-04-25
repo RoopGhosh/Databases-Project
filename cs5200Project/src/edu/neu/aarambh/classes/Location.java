@@ -11,11 +11,11 @@ public class Location {
 	private Integer locationid;
 	private String locname;
 	private String description;
-	private float latitude;
-	private float longitude;
+	private Double latitude;
+	private Double longitude;
 	private String city;
 	private String state;
-	private Integer zip;
+	private String zip;
 	public Integer getLocationid() {
 		return locationid;
 	}
@@ -34,16 +34,16 @@ public class Location {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(float latitude2) {
+	public void setLatitude(double latitude2) {
 		this.latitude = latitude2;
 	}
-	public float getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(float longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 	public String getCity() {
@@ -58,15 +58,15 @@ public class Location {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Integer getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(Integer zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public Location(Integer locationid, String locname, String description,
-			float latitude, float longitude, String city, String state,
-			Integer zip) {
+			double latitude, double longitude, String city, String state,
+			String zip) {
 		super();
 		this.locationid = locationid;
 		this.locname = locname;

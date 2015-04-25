@@ -12,7 +12,9 @@ import org.codehaus.jettison.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.neu.aarambh.DAO.DAOLocation;
 import edu.neu.aarambh.DAO.DAOProperty;
+import edu.neu.aarambh.classes.Location;
 import edu.neu.aarambh.classes.Property;
 
 public class Webhitter {
@@ -41,32 +43,38 @@ public class Webhitter {
   
   public List<Property> searchResults(String urlstring, String searchString) throws IOException, JSONException
   {
-	  JSONObject json = readJsonFromUrl(urlstring);
+	  JSONObject json = readJsonFromUrl("http://api.nestoria.co.uk/api?action=search_listings&encoding=json&pretty=1&place_name=soho&country=uk&listing_type=buy");
 	    JSONObject reponse = json.getJSONObject("response");
 	    org.json.JSONArray listings = reponse.getJSONArray("listings");
 	    System.out.println(listings.length());
 	    for (int i = 0 ; i < listings.length(); i++)
 	    	{
-	    		String propertyname = listings.getJSONObject(i).getString("title");
-	    		int locationid = 1;
+		    	Double latitude = listings.getJSONObject(i).getDouble("latitude");
+	    		Double longitude = listings.getJSONObject(i).getDouble("longitude");
 	    		String propertytype = listings.getJSONObject(i).getString("listing_type");
+	    		Geocoder geocode = new Geocoder();
+	    		Geocoder newgeo = geocode.latlong2Address(latitude, longitude);
+	    		String address = newgeo.getAddress();
+	    		String city = newgeo.getCity();
+	    		String state = newgeo.getCountry();
+	    		String zip = newgeo.getZip();
+	    		String locname = listings.getJSONObject(i).getString("datasource_name");
+	    		String loc_desc = listings.getJSONObject(i).getString("property_type");
+	    		String propertyname = listings.getJSONObject(i).getString("title");
+	    		
+	    		int locationid = insertnewLocationAndReturnId(locname, loc_desc,latitude,longitude,city,state,zip);
 	    		int amenityid = 2;
-	    		String address = "not available";
-	    		String city = searchString;
-	    		String state = "not available";
-	    		int zip = 00;
 	    		int price = listings.getJSONObject(i).getInt("price");
 	    		String url = listings.getJSONObject(i).getString("img_url");
 	    		//String lister_url = listings.getJSONObject(i).getString("lister_url");
 	    		String guiid = listings.getJSONObject(i).getString("guid");
-	    		
 	    		DAOProperty property = new DAOProperty();
-	    		Property prop = new Property();
 	    		List<Property> properties = property.findPropertythruGuiid(guiid);
+	    		
 	    		
 	    		if (properties.isEmpty())
 	    		{
-	    			int id = property.insertNewProperty(propertyname, locationid, propertytype, amenityid, address, city, state, zip, price, url, guiid);
+	    			property.insertNewProperty(propertyname, locationid, propertytype, amenityid, address, city, state, zip, price, url, guiid);
 	    		}
 	    		else
 	    		{
@@ -78,15 +86,30 @@ public class Webhitter {
 	    return newprop.findPropertybyCity(searchString);
   }
 
- /* public static void main(String[] args) throws IOException, JSONException 
+  private int insertnewLocationAndReturnId (String locname, String loc_desc, Double latitude, Double longitude,String city, String state,String zip)
   {
-    Webhitter  web = new Webhitter();
-    List<Property> lop = web.searchResults("http://api.nestoria.co.uk/api?action=search_listings&encoding=json&pretty=1&place_name=soho&country=uk&listing_type=buy",
-    		"Boston");
-    
-    for (Property p : lop)
-    {
-    	System.out.println(p.getPropertyname());
-    } 
-  }*/
+	  DAOLocation location = new DAOLocation();
+		
+	  if (location.findLocationbyLatlong(latitude, longitude).isEmpty())
+		{
+			return location.insertNewLocation(locname, loc_desc, latitude, longitude, city, state, zip);
+		}
+		else
+		{
+			return location.findLocationbyLatlong(latitude, longitude).get(0).getLocationid();
+		}
+  }
+  
+  
+// public static void main(String[] args) throws IOException, JSONException 
+//  {
+//    Webhitter  web = new Webhitter();
+//    List<Property> lop = web.searchResults("http://api.nestoria.co.uk/api?action=search_listings&encoding=json&pretty=1&place_name=soho&country=uk&listing_type=buy",
+//    		"Boston");
+//    
+//    for (Property p : lop)
+//    {
+//    	System.out.println(p.getPropertyname());
+//    } 
+//  }
 }

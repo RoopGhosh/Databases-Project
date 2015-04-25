@@ -47,11 +47,13 @@ public class SignupServelet extends HttpServlet {
 		    		 sqlDate,
 		    		 x,
 		    		 request.getParameter("email"));
+		     response.sendRedirect("LoginAarambh.jsp"); //logged-in page     
 		     		} 
 		
 		catch (Throwable theException) 	    
 		{
 		     System.out.println(theException); 
+		     response.sendRedirect("Signup.jsp"); //logged-in page     
 		}
 	}
 

@@ -17,7 +17,7 @@ public class Property {
 	private String address;
 	private String city;
 	private String state;
-	private Integer zip;
+	private String zip;
 	private Integer price;
 	private String url;
 	private String guiid;
@@ -69,10 +69,10 @@ public class Property {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Integer getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(Integer zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public Integer getPrice() {
@@ -95,7 +95,7 @@ public class Property {
 	}
 	public Property(Integer propertyid, String propertyname,
 			Integer locationid, String propertytype, Integer amenityid,
-			String address, String city, String state, Integer zip,
+			String address, String city, String state, String zip,
 			Integer price, String url, String guiid) {
 		super();
 		this.propertyid = propertyid;

@@ -16,7 +16,7 @@ public class DAOProperty {
 	EntityManager em = factory.createEntityManager();
 	
 	//inserting in the table
-	public int insertNewProperty(String propertyname, int locationid,String propertytype, int amenityid, String address,String city, String state, int zip, int price, String url, String guiid)
+	public int insertNewProperty(String propertyname, int locationid,String propertytype, int amenityid, String address,String city, String state, String zip, int price, String url, String guiid)
 	{
 		Property prop = new Property();
 		prop.setPropertyid(nextid());
@@ -134,7 +134,7 @@ public class DAOProperty {
 		return query.getResultList();
 	}
 	//finding api thru zip
-	public List<Property> findPropertybyZip(int id)
+	public List<Property> findPropertybyZip(String id)
 	{
 		Query query = em.createQuery("SELECT a  FROM Property a WHERE a.zip LIKE :type" );
 		query.setParameter("type", id);

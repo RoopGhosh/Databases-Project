@@ -16,7 +16,7 @@ public class DAOLocation {
 	EntityManager em = factory.createEntityManager();
 	
 	//inserting in the table
-			public int insertNewLocation(String locname, String description, float latitude, float longitude ,String city, String state, int zip)
+			public int insertNewLocation(String locname, String description, Double latitude, Double longitude ,String city, String state, String zip)
 			{
 				Location location = new Location();
 				location.setLocationid(nextid());
@@ -54,7 +54,7 @@ public class DAOLocation {
 	}
 	
 	//finding using latitude and longitude
-	public List<Location> findLocationbyLatlong(int latitude, int longitude)
+	public List<Location> findLocationbyLatlong(Double latitude, Double longitude)
 	{
 		Query query = em.createQuery("select x from Location x where x.latitude LIKE :latitude and x.longitude LIKE :longitude");
 		query.setParameter("latitude", latitude);

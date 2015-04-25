@@ -55,13 +55,13 @@ public class Login extends HttpServlet {
 			   		    
 		     if(b == false)
 		     {
-		    	 response.sendRedirect("Login.jsp"); //error page
+		    	 response.sendRedirect("login.jsp"); //error page
 		     }
 		     else 
 		     {
 		          HttpSession session = request.getSession(true);	    
 		          session.setAttribute("currentSessionUser",user);
-		          response.sendRedirect("Signup.jsp"); //logged-in page      		
+		          response.sendRedirect("LoginAarambh.jsp"); //logged-in page 
 		     }
 		}
 		
