@@ -1,16 +1,25 @@
 package edu.neu.aarambh.classes;
 
+import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
 
 @Entity
 public class Amenity {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer amenityid;
 	private String amenname;
 	private String amentype;
 	private String description;
+	
+	
 	public Integer getAmenityid() {
 		return amenityid;
 	}

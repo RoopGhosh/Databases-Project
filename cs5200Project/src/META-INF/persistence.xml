@@ -14,6 +14,7 @@
 		<class>edu.neu.aarambh.classes.Rating</class>
 		<class>edu.neu.aarambh.classes.Shortlist</class>
 		<class>edu.neu.aarambh.classes.User</class>
+		<class>edu.neu.aarambh.classes.Prop_amen_map</class>
 		
 		<properties>
 			<property name="eclipselink.jdbc.password" value="123456" />

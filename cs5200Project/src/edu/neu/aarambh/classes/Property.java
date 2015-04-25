@@ -1,11 +1,14 @@
 package edu.neu.aarambh.classes;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 @Entity
 public class Property {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer propertyid;
 	private String propertyname;
 	private Integer locationid;
@@ -16,6 +19,8 @@ public class Property {
 	private String state;
 	private Integer zip;
 	private Integer price;
+	private String url;
+	private String guiid;
 	public Integer getPropertyid() {
 		return propertyid;
 	}
@@ -76,10 +81,22 @@ public class Property {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getGuiid() {
+		return guiid;
+	}
+	public void setGuiid(String guiid) {
+		this.guiid = guiid;
+	}
 	public Property(Integer propertyid, String propertyname,
 			Integer locationid, String propertytype, Integer amenityid,
 			String address, String city, String state, Integer zip,
-			Integer price) {
+			Integer price, String url, String guiid) {
 		super();
 		this.propertyid = propertyid;
 		this.propertyname = propertyname;
@@ -91,8 +108,13 @@ public class Property {
 		this.state = state;
 		this.zip = zip;
 		this.price = price;
+		this.url = url;
+		this.guiid = guiid;
 	}
 	public Property() {
 		super();
 	}
+	
+
+
 }

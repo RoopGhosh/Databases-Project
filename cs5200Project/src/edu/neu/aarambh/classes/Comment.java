@@ -5,12 +5,15 @@ package edu.neu.aarambh.classes;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Comment {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer commentid;
 	private String username;
 	private Integer propertyid;
@@ -18,6 +21,7 @@ public class Comment {
 	private String commheader;
 	private String commdesc;
 	private Date commdte;
+	private int replyid;
 	public Integer getCommentid() {
 		return commentid;
 	}
@@ -56,7 +60,7 @@ public class Comment {
 	}
 	
 	public Comment(Integer commentid, String username, Integer propertyid,
-			Integer locationid, String commheader, String commdesc, Date commdte) {
+			Integer locationid, String commheader, String commdesc, Date commdte, int replyid) {
 		super();
 		this.commentid = commentid;
 		this.username = username;
@@ -65,6 +69,7 @@ public class Comment {
 		this.commheader = commheader;
 		this.commdesc = commdesc;
 		this.commdte = commdte;
+		this.replyid = replyid;
 	}
 	public Comment() {
 		super();
@@ -74,6 +79,12 @@ public class Comment {
 	}
 	public void setCommdte(Date commdte) {
 		this.commdte = commdte;
+	}
+	public int getReplyid() {
+		return replyid;
+	}
+	public void setReplyid(int replyid) {
+		this.replyid = replyid;
 	}
 	
 }

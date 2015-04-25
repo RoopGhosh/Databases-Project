@@ -1,15 +1,18 @@
 package edu.neu.aarambh.classes;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 @Entity
 public class Location {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer locationid;
 	private String locname;
 	private String description;
-	private Double latitude;
-	private Double longitude;
+	private float latitude;
+	private float longitude;
 	private String city;
 	private String state;
 	private Integer zip;
@@ -31,16 +34,16 @@ public class Location {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Double getLatitude() {
+	public float getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+	public void setLatitude(float latitude2) {
+		this.latitude = latitude2;
 	}
-	public Double getLongitude() {
+	public float getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Double longitude) {
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
 	public String getCity() {
@@ -62,7 +65,7 @@ public class Location {
 		this.zip = zip;
 	}
 	public Location(Integer locationid, String locname, String description,
-			Double latitude, Double longitude, String city, String state,
+			float latitude, float longitude, String city, String state,
 			Integer zip) {
 		super();
 		this.locationid = locationid;

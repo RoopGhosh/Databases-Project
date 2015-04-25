@@ -1,11 +1,14 @@
 package edu.neu.aarambh.classes;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 @Entity
 public class Shortlist {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer Shortlistid;
 	private String username;
 	private Integer propertyid;

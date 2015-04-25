@@ -7,20 +7,21 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>Login.jsp</welcome-file>
     <welcome-file>LoginAarambh.jsp</welcome-file>
+    <welcome-file>Signup.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>Jersey REST Service</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-    <init-param>	
+    <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name>
       <param-value>edu.neu.aarambh.classes,edu.neu.aarambh.classes</param-value>
     </init-param>
-	<init-param>
-		<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-		<param-value>true</param-value>
-	</init-param>
+    <init-param>
+      <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+      <param-value>true</param-value>
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
@@ -28,4 +29,3 @@
     <url-pattern>/REST/*</url-pattern>
   </servlet-mapping>
 </web-app>
-
