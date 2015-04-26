@@ -1,5 +1,6 @@
+<%@page import="edu.neu.aarambh.servelets.Webhitter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.*" import="edu.neu.aarambh.classes.Property" import="edu.neu.aarambh.DAO.DAOProperty" import="edu.neu.aarambh.servelets.Webhitter" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,34 +18,22 @@
 <link href="resource\css\style.css" rel="stylesheet"/>
 <link href="resource\js\bootstrap.js" rel="js"/>
 <link href="resource\js\bootstrap.min.js" rel="js"/>
-</head>
-<body>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-	<script>
-
-// FOR REFRESHING THE EMBEDDED PAGE ON TIME INTERVALS 
-	//$(function(){
-     //   $('#mapld').load('http://www.somesitehere.com');
-    //});
-	
-	// TO RENDER MAP ON CLICK OF SEARCH
-	//$(document). ready(function(){
-	//	$('#submit'). click(function(){
-	//	$('#mapld'). load ("maps.html");
-	//	});
-	//	});
-
-	</script>
-
-<style type="text/css">
-div#mapld {
-	width: 62%;
-	height:350px;
-}
-</style>
-
+<!-- CSS FILE LINK AND JS FILE LINK FOR THE SLIDER -->
+    <link href="resource\css\js-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="resource\js\js-image-slider.js" type="text/javascript"></script>
+    
+ <!-- -->
+ 
+ <!-- SCRIPT FOR MAPS RENDERING  -->
 <script>
+
+var userName= localStorage.getItem("userName");
+
+
+// MAP RENDERING SCRIPT
+
 function initialize() {
 	var myLatlng = new google.maps.LatLng(53.5500,2.4333);
 	var mapOptions = {
@@ -79,11 +68,106 @@ function loadScript() {
 	    marker.setAnimation(google.maps.Animation.BOUNCE);
 	  }
 	}
-
+ 
 
 window.onload = loadScript;
 
-    </script>
+
+
+// - > SEARCH VISIBILITY
+
+     function setVisibility()
+     {
+    	
+     	if(document.getElementById('select').value == 'Price')
+     		{
+     			document.getElementById('inp').style.display = 'NONE';
+     			document.getElementById('minprice').style.display = 'block';
+     			document.getElementById('maxprice').style.display = 'block';
+     		}
+     	else
+     		{
+	     		document.getElementById('inp').style.display = 'block';
+	 			document.getElementById('minprice').style.display = 'NONE';
+	 			document.getElementById('maxprice').style.display = 'NONE';
+     		}
+     		
+     }
+     function logOutUser()
+     {
+    	 alert("Log Out");
+    	 localStorage.clear();
+    	 var userName= localStorage.getItem("userName");
+    	 alert("after logout"+userName);
+    	 location.reload();
+     }
+     
+
+
+		window.onload = loadScript();
+
+// Comment
+
+     jQuery(document).ready(function() {
+    	 if(userName != null)
+    		{
+    			jQuery('#formdiv').show();
+    		
+    		}
+    	else
+    		{
+    		jQuery('#formdiv').hide();
+    		}
+    	 
+    	 
+    	 $("#sfl").hide();
+    	 $("#min").hide();
+    	 $("#max").hide();
+         $("#select").change(function(event) {
+        	 
+                    var selval=$("#select option:selected").text();
+                    
+             	    if(selval === "City" ||selval === "State" ||selval === "Zip" ||selval === "Aminity")
+             	    {
+             	    	$("#sfl").show();
+             	    	
+             	    	
+             	    }
+             	    else if(selval === "Price")
+             	    {
+             	    	$("#min").show();
+             	    	$("#max").show();
+             	    }         
+            });
+         });
+
+    // </script>
+</head>
+<body>
+
+
+	<script>
+
+// FOR REFRESHING THE EMBEDDED PAGE ON TIME INTERVALS 
+	//$(function(){
+     //   $('#mapld').load('http://www.somesitehere.com');
+    //});
+	
+	// TO RENDER MAP ON CLICK OF SEARCH
+	//$(document). ready(function(){
+	//	$('#submit'). click(function(){
+	//	$('#mapld'). load ("maps.html");
+	//	});
+	//	});
+
+	</script>
+
+<style type="text/css">
+div#mapld {
+	width: 62%;
+	height:350px;
+}
+</style>
 
 
 <!--  HEADER FORMATTING ARAMBH -->
@@ -107,18 +191,37 @@ window.onload = loadScript;
 							<li><a href="#RentingHomes">Renting Homes</a></li>
 							<li><a href="#AboutUs">About Us </a></li>
 							<li><a href="#Customers">Customers</a></li>
-							<li></li>
 							<li><a href="#Contact">Contact</a></li>
+							<li><a href="#LogOut" onClick="logOutUser()">LogOut</a></li>
+							<li style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
+								{
+								document.write(localStorage.getItem("userName"));
+								}
+								else
+								{
+									//document.write("No User");
+								}
+							</script></li>
+							
 						</ul>
 					</div>
 				</div>
 
 			
 <!--  IMAGE SLIDER IN ARAMBH -->
-				<div class="hero-unit">
-			    <h2> Will Contain Slider</h2>
-			    <a href="#" class="btn btn-small btn-info">Slider Starts Here</a>
-			    </div>
+			<br>
+		
+			<div class="div1" style="width: 100%; height: 450px">
+				<div id="slider">
+				<a href="" target="_blank">
+				<img src="resource/img/img1.jpg" alt="" /></a>
+				<a class="lazyImage" href="resource/img/img2.jpg" title="">t</a>
+				<b data-src="resource/img/img3.jpg">Slider</b></a>
+				<a class="lazyImage" href="resource/img/img4.jpg" title="">Slide</a>
+				<a class="lazyImage" href="resource/img/img5.jpg" title=""></a>
+				</div>
+			</div>
+			<br>	
 
 <!-- CREATING SEARCH TAB IN ARAMBH -->
 	<div class="row"> 
@@ -129,86 +232,111 @@ window.onload = loadScript;
 		<div class="active"><h3>Find your Apartment</h3></div>
 		</div>
 		
-		<div class="form">	
+		<form action="LoginAarambh.jsp"> 
+		<div class="form" style="width:100%">	
         
-			<div class="form_row">
-			<label class="left"><b>Address:</b> </label> <input type="text"
-			class="form_input" id="address" name="address" placeholder="address"/>
-			</div>
+		 	<div class="form_row">
+			       
+        	<select class="form-control" id="select" name = "combo"  onchange="setVisibility()">
+        	<option>Select</option>
+        	<option>WebCity</option>
+        	<option>State</option>
+        	<option>Zip</option>
+        	<option>Price</option>
+        	<option>Amenity</option>
+        	<option>City</option>
+        	</select>
+        	</div>
+        	
+			<div class="form_row" id="sfl">
 			
-			<div class="form_row">
-			<label class="left"><b>City: </b></label> <input type="text"
-			class="form_input" id="city" name="city" placeholder="city"/>
-			</div>
+			<label class="left"><b>&nbsp;</b> </label>
 			
-			<div class="form_row">
-			<label class="left"><b>State:</b> </label> <input type="text"
-			class="form_input" id="state" name="state" placeholder="state"/>
-			</div>
+			 <input type="text"
+			class="form_input" id="inp" name="inp" placeholder="Enter Value"/>
 			
-			<div class="form_row">
-			<label class="left"><b>Country:</b> </label> <input type="text"
-			class="form_input" id="country" name="country" placeholder="country"/>
 			</div>
+						
+			<div class="form_row" id="min">
 			
-			<div class="form_row">
-			<label class="left"><b>ZipCode:</b> </label> <input type="text"
-			class="form_input" id="zip" name="zip" placeholder="zip"/>
-			</div>
-			
-			<div class="form_row">
-			<label class="left"><b>Price: </b></label> <input type="text"
+			<label class="left"><b>&nbsp;</b></label> <input type="text"
 			class="form_input"  id="minprice" name="minprice" placeholder="minimum price"/>
+			
 			</div>
 			
-			<div class="form_row">
-			<label class="left"><b>To: </b></label> <input type="text"
+			<div class="form_row" id="max">
+			<label class="left"><b>&nbsp;</b></label> <input type="text"
 			class="form_input" id="maxprice" name="maxprice" placeholder="max price"/>
 			</div>
 			
 			<div class="form_row">
-			<label class="left"><b>Rooms: </b></label> <input type="text"
-			class="form_input" id="room" name="room" placeholder="no of rooms"/>
+			<div style="float: right; padding: 10px 25px 0 0;">
+			<button type="submit" class="btn btn-info" id="submit" name="action" value="create">Search</button>
+			</div>
 			</div>
 			
-				
-			<div class="form_row">
-			<label class="left_long"><b>Looking for:</b> </label>
-			</div>
-			<div class="form_row">
-			<input type="radio" name="reason" id="reason"/> Sell
-			</div>
-			<div class="form_row">
-			<input type="radio" name="reason" id="reason"/> Buy
-			</div>
-			<div class="form_row">
-			<input type="radio" name="reason" id="reason"/> Rent
-			</div>
-			<div style="float: right; padding: 10px 25px 0 0;">
-			<button type="submit" class="btn btn-info" id="submit">Search</button>
-			</div>
+			<br>
+			<br>
+			
+			<div id = "formdiv" style="display:none;float: right; padding: 10px 25px 0 0;">
+			<a href="#" id="sellHm" class="nav_footer"> Selling Homes </a>
+			<a href="#" id="buyHm" class="nav_footer"> Buying Homes </a>
+			<a href="#" id= "rentHm" class="nav_footer"> Renting Homes</a>
+			</div> 
 		</div>
+		</form>
   		</div>
  
 <!-- CREATING MAPS IN AARAMBH -->
 		
   		<div class="span8" id="mapld">
-  		<H4>map comes here</H4>
-    	</div>
+  		</div>
 	</div>	
 	
 	<br>
 	<br>
 	
+  <div id="well">
+
+   <h1> APARTMENTS LIST</h1>
+   <br>
+   
+  <table class="table table-striped">   
+   <% 
+   DAOProperty dao = new DAOProperty();
+	String st = request.getParameter("action");
+	String st1 = request.getParameter("inp");
+	String st2 = request.getParameter("combo");
+	String city = "City";
+   if ("create".equals (st))
+   {
+	
+	   Webhitter  web = new Webhitter();
+ 	List<Property> prop = web.searchResults(st1);
  	
+    for (Property property : prop)
+   		{%>
+	   <tr>
+				<td><%=property.getAddress()%>		</td>
+				<td><%=property.getCity()%>			</td>
+				<td><%=property.getPropertyname()%>	</td>
+				<td><%=property.getPropertytype()%>	</td>
+				<td><%=property.getState()%>		</td>
+				<td><%=property.getZip()%>			</td>
+				<td><%=property.getGuiid()%>		</td>
+			</tr>
+	   <%
+   		}
+   }  %>
+  </table>
+  </div>
+  
+  <br>
   <div id="footer">
 			<ul class="footer_menu">
-				<li><a href="" class="nav_footer"> Home </a></li>
-				<li><a href="" class="nav_footer"> Selling Homes </a></li>
-				<li><a href="" class="nav_footer"> Buying Homes </a></li>
-				<li><a href="" class="nav_footer"> Renting Homes</a></li>
-				<li><a href="" class="nav_footer"> RSS </a></li>
-				<li><a href="" class="nav_footer"> Contact </a></li>
+				<li><a href="#" class="nav_footer"> Home </a></li>
+				<li><a href="#" class="nav_footer"> RSS </a></li>
+				<li><a href="#" class="nav_footer"> Contact </a></li>
 			</ul>
 		</div>
   </div>	

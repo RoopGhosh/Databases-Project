@@ -41,9 +41,11 @@ public class Webhitter {
   }
   
   
-  public List<Property> searchResults(String urlstring, String searchString) throws IOException, JSONException
+  public List<Property> searchResults(String searchString) throws IOException, JSONException
   {
-	  JSONObject json = readJsonFromUrl("http://api.nestoria.co.uk/api?action=search_listings&encoding=json&pretty=1&place_name=soho&country=uk&listing_type=buy");
+	  String searchURL = "http://api.nestoria.co.uk/api?action=search_listings&encoding=json&pretty=1&place_name=$CITYNAME&country=uk&listing_type=buy";
+	  searchURL = searchURL.replace("$CITYNAME", searchString);
+	  JSONObject json = readJsonFromUrl(searchURL);
 	    JSONObject reponse = json.getJSONObject("response");
 	    org.json.JSONArray listings = reponse.getJSONArray("listings");
 	    System.out.println(listings.length());
@@ -55,7 +57,8 @@ public class Webhitter {
 	    		Geocoder geocode = new Geocoder();
 	    		Geocoder newgeo = geocode.latlong2Address(latitude, longitude);
 	    		String address = newgeo.getAddress();
-	    		String city = newgeo.getCity();
+	    		String city = searchString;
+	    				/*newgeo.getCity();*/
 	    		String state = newgeo.getCountry();
 	    		String zip = newgeo.getZip();
 	    		String locname = listings.getJSONObject(i).getString("datasource_name");

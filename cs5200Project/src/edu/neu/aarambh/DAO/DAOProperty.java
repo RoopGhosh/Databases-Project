@@ -157,7 +157,7 @@ public class DAOProperty {
 //	public static void main (String[] args)
 //	{
 //		DAOProperty prop = new DAOProperty();
-//		List<Property> properties = prop.findPropertybyZip(2215);
+//		List<Property> properties = prop.findPropertybyCity("boston");
 //		for (Property p : properties)
 //		{
 //			System.out.println(p.getPropertyname());

@@ -32,9 +32,21 @@ jQuery(document).ready(function($){});
  {
   <% DAOUser d = new DAOUser();
   	d.findUser(%> userName <% , %> password <%);
+  	
   %> 
  }
 } --%>
+
+function setUserSession()
+	{
+	var usrName = document.getElementById('username').value;
+	if (typeof(Storage) != "undefined")
+	{
+		
+		localStorage.setItem("userName",usrName);
+	}
+
+	}
 </script>
 </head>
 <body>
@@ -78,7 +90,7 @@ jQuery(document).ready(function($){});
         <div class="control-group">
         <label class="control-label"></label>
         <div class="controls">
-        <button type="submit" class="btn btn-success" onClick = "Login" >Login</button>
+        <button type="submit" class="btn btn-success" onClick = "setUserSession()" >Login</button>
         </div></div>
         
 </form>
