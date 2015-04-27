@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import edu.neu.aarambh.classes.Interested;
+import edu.neu.aarambh.classes.Property;
 import edu.neu.aarambh.classes.User;
 
 public class DAOInterested {
@@ -42,6 +43,12 @@ public class DAOInterested {
 	{
 		Query query = em.createQuery("select q from Interested q WHERE q.quecategory LIKE :category");
 		query.setParameter("category", category);
+		return query.getResultList();
+	}
+	
+	public List<Interested> getAllInterested()
+	{
+		Query query = em.createQuery("select x from Interested x");
 		return query.getResultList();
 	}
 	

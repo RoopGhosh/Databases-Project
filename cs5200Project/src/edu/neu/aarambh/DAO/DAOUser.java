@@ -46,6 +46,12 @@ public class DAOUser {
 		}
 	}
 	
+	public List<User> getAllUser()
+	{
+		Query query = em.createQuery("select x from User x");
+		return query.getResultList();
+	}
+	
 	public void updateUser(String username, String password, String firstname, String lastname ,Date date, Integer phno, String email)
 	{
 		User user = em.find(User.class, username);
@@ -61,13 +67,19 @@ public class DAOUser {
 	}
 	
 public static void main(String[] args) {
-		
-		DAOUser user = new DAOUser();
-		Date sqlDate = new Date(19900303);
-	   sqlDate = new java.sql.Date(sqlDate.getTime());
-		user.insertNewUser("kumar", "32", "roop", "kumar", sqlDate , 900, "adasd@gmial.com");
-		DAOUser user1 = new DAOUser();
-		user1.findUser("kumar","123");
+//		
+//		DAOUser user = new DAOUser();
+//		Date sqlDate = new Date(19900303);
+//	    sqlDate = new java.sql.Date(sqlDate.getTime());
+//		//user.insertNewUser("kumar", "32", "roop", "kumar", sqlDate , 900, "adasd@gmial.com");
+//		DAOUser user1 = new DAOUser();
+//		//user1.findUser("kumar","123");
+//		List<User> users = user1.getAllUser();
+//		for (User u : users)
+//		{
+//			System.out.println(u.getFirstname());
+//		}
+	
 }
 	
 }

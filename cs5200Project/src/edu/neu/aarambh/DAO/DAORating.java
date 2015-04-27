@@ -38,7 +38,13 @@ public class DAORating {
 			return (1 + (Integer)em.createQuery("select max(u.ratingid) from Rating u").getSingleResult());
 
 		}
-	
+		public List<Rating> getAllRating()
+		{
+			Query query = em.createQuery("select x from Rating x");
+			return query.getResultList();
+		}
+		
+		
 	//find ratings thru username
 	public List<Rating> findRatingsbyUsername(String username)
 	{

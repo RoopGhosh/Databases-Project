@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import edu.neu.aarambh.classes.History;
+import edu.neu.aarambh.classes.Property;
 import edu.neu.aarambh.classes.User;
 
 public class DAOHistory {
@@ -17,7 +18,7 @@ public class DAOHistory {
 	EntityManager em = factory.createEntityManager();
 	
 	//inserting in the table
-		public int insertNewHistory (String username, Date cdate, int commid, int queryid ,int propertyid)
+		public int insertNewHistory (String username, Date cdate, int commid, int queryid ,int propertyid, String description)
 		{
 			History history = new History();
 			history.setHistid(nextid());
@@ -26,12 +27,19 @@ public class DAOHistory {
 			history.setCommid(commid);
 			history.setQueryid(queryid);
 			history.setPropertyid(propertyid);
+			history.setDescription(description);
 			em.getTransaction().begin();
 			em.persist(history);
 			em.getTransaction().commit();
 			return history.getHistid();
 			}
 	
+		public List<History> getAllHistory()
+		{
+			Query query = em.createQuery("select x from History x");
+			return query.getResultList();
+		}
+		
 		//get the last primary key id from the table 
 		public int nextid()
 		{
@@ -47,5 +55,14 @@ public class DAOHistory {
 		return query.getResultList();
 	}
 	
+	
+//public static void main(String[] args)
+//{
+//	DAOHistory ds = new DAOHistory();
+//	java.util.Date utilDate = new java.util.Date();
+//	   java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+//	ds.insertNewHistory("roop", sqlDate, 0, 0, 1, "hello world");
+//}
+//	
 	// there is huge scope of views in this table
 }

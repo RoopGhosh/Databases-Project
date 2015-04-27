@@ -37,6 +37,13 @@ public class DAOShortlist {
 			return (1 + (Integer)em.createQuery("select max(u.shorlistid) from Shortlist u").getSingleResult());
 
 		}
+		
+		public List<Shortlist> getAllShortlist()
+		{
+			Query query = em.createQuery("select x from Shortlist x");
+			return query.getResultList();
+		}
+		
 	//returns the list of propertyid shortlisted by the user
 	public ArrayList<Integer> getPropertyIdfromShortlistByUser(String username)
 	{

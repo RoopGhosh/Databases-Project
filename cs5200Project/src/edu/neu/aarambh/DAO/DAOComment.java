@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import edu.neu.aarambh.classes.Agreement;
 import edu.neu.aarambh.classes.Comment;
+import edu.neu.aarambh.classes.Property;
 
 public class DAOComment {
 
@@ -43,6 +44,13 @@ public class DAOComment {
 			return (1 + (Integer)em.createQuery("select max(u.commentid) from Comment u").getSingleResult());
 
 		}
+		
+		public List<Comment> getAllComment()
+		{
+			Query query = em.createQuery("select x from Comment x");
+			return query.getResultList();
+		}
+		
 		
 	//finding comments by username;
 	public List<Comment> findCommentbyUsername(String username)

@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import edu.neu.aarambh.classes.Interested;
 import edu.neu.aarambh.classes.Location;
+import edu.neu.aarambh.classes.Property;
 
 public class DAOLocation {
 
@@ -32,6 +33,13 @@ public class DAOLocation {
 				em.getTransaction().commit();
 				return location.getLocationid();
 				}
+			
+			public List<Location> getAllLocation()
+			{
+				Query query = em.createQuery("select x from Location x");
+				return query.getResultList();
+			}
+			
 	
 			//get the last primary key id from the table 
 			public int nextid()

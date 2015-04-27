@@ -1,6 +1,6 @@
 <%@page import="edu.neu.aarambh.servelets.Webhitter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*" import="edu.neu.aarambh.classes.Property" import="edu.neu.aarambh.DAO.DAOProperty" import="edu.neu.aarambh.servelets.Webhitter" %>
+    pageEncoding="ISO-8859-1" import="java.util.*" import="java.sql.Date.*" import= "edu.neu.aarambh.classes.User" import="edu.neu.aarambh.classes.Property" import="edu.neu.aarambh.DAO.*" import="edu.neu.aarambh.servelets.Webhitter" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,9 +35,9 @@ var userName= localStorage.getItem("userName");
 // MAP RENDERING SCRIPT
 
 function initialize() {
-	var myLatlng = new google.maps.LatLng(53.5500,2.4333);
+	var myLatlng = new google.maps.LatLng(51.7519, 1.2578);
 	var mapOptions = {
-    zoom: 4,
+    zoom: 6,
     center: myLatlng
   };
 
@@ -141,7 +141,13 @@ window.onload = loadScript;
             });
          });
 
-    // </script>
+    //
+    function abc()
+    {
+    	alert(document.getElementById("pol").innerHTML);
+    	
+    }
+    </script>
 </head>
 <body>
 
@@ -193,8 +199,9 @@ div#mapld {
 							<li><a href="#Customers">Customers</a></li>
 							<li><a href="#Contact">Contact</a></li>
 							<li><a href="#LogOut" onClick="logOutUser()">LogOut</a></li>
-							<li style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
+							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
 								{
+								
 								document.write(localStorage.getItem("userName"));
 								}
 								else
@@ -207,6 +214,20 @@ div#mapld {
 					</div>
 				</div>
 
+<script>
+function getusername()
+{
+	String ok;
+	if(localStorage.getItem("userName") != null)
+	{
+	ok = (localStorage.getItem("userName"));
+	}
+	else
+	{
+		ok = "";
+	}
+}
+</script>
 			
 <!--  IMAGE SLIDER IN ARAMBH -->
 			<br>
@@ -248,6 +269,15 @@ div#mapld {
         	</select>
         	</div>
         	
+        	<div class="form_row">
+			       
+        	<select class="form-control" id="listing" name = "combolisting"  onchange="setVisibility()">
+        	<option>buy</option>
+        	<option>rent</option>
+        	<option>share</option>
+        	</select>
+        	</div>
+        	
 			<div class="form_row" id="sfl">
 			
 			<label class="left"><b>&nbsp;</b> </label>
@@ -275,6 +305,7 @@ div#mapld {
 			</div>
 			</div>
 			
+			
 			<br>
 			<br>
 			
@@ -301,29 +332,116 @@ div#mapld {
    <h1> APARTMENTS LIST</h1>
    <br>
    
-  <table class="table table-striped">   
+   
+  <table class="table table-bordered">   
    <% 
-   DAOProperty dao = new DAOProperty();
+   
+   	DAOProperty dao = new DAOProperty();
 	String st = request.getParameter("action");
-	String st1 = request.getParameter("inp");
-	String st2 = request.getParameter("combo");
-	String city = "City";
+	String combo = request.getParameter("combo");
+	String listing_type = request.getParameter("combolisting");
+	System.out.println(combo);
+	 Webhitter  web = new Webhitter();
+	 DAOProperty propDAO = new DAOProperty();
+	 List<Property> prop = new  ArrayList<Property>();
    if ("create".equals (st))
    {
+	   
+	   String name;
+  		try {
+  			session.getAttribute("currentSessionUser").toString();
+  			name = session.getAttribute("currentSessionUser").toString();
+  		}
+  		catch(NullPointerException e)
+  		{
+  			name = "";
+  		}
+  	   java.util.Date utilDate = new java.util.Date();
+	   java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+      DAOHistory historydao = new DAOHistory();
+      String desc = name + " Searched for property in " + request.getParameter("inp");
+      if (name.isEmpty())
+      {
+    	  
+      }
+      else
+      {
+    	  historydao.insertNewHistory( name , sqlDate, 0, 0, 1, desc);
+      }  
+	 switch (combo)
+	 {
+	 case "WebCity" :
+		 prop =  web.searchResults(request.getParameter("inp"), listing_type);
+	 	break;
+	 case "State":
+		 prop =   propDAO.findPropertybyState(request.getParameter("inp"));
+	 	break;
+	 case "City" :
+		prop =   propDAO.findPropertybyCity(request.getParameter("inp"));
+	 	break;
+	 case "Zip" :
+	 	prop = propDAO.findPropertybyZip(request.getParameter("inp"));
+	 	break;
+	 case "Price" :
+	 	prop = propDAO.findPropertybyPrice(Integer.parseInt(request.getParameter("maxprice")), Integer.parseInt(request.getParameter("minprice")));
+	 	break;
+	 case "Amenity" :
+		 prop = propDAO.findPropertybyAmenityId(Integer.parseInt(request.getParameter("inp")));
+		 break;
+	 default: System.out.println("default hit");
+	 }
 	
-	   Webhitter  web = new Webhitter();
- 	List<Property> prop = web.searchResults(st1);
- 	
+	 //List<Property> prop =   propDAO.findPropertybyCity("London");  //web.searchResults(txtfield);
+ 	if ( prop.isEmpty())
+ 	{
+ 		%> <td> <h1> NO DATA </h1></td><%
+ 	}
+ 	%>
+ 	<tr>
+ 		<td>
+ 			<b>Image</b>
+ 		</td>
+ 		<td>
+ 			<b>Address</b>
+ 		</td>
+ 		<td>
+ 			<b>City</b>
+ 		</td>
+ 		<td>
+ 			<b>Property Name</b>
+ 		</td>
+ 		<td>
+ 			<b>Type</b>
+ 		</td>
+ 		<td>
+ 			<b>State</b>
+ 		</td>
+ 		<td>
+ 			<b>Zip</b>
+ 		</td>
+ 		<td>
+ 			<b>Price</b>
+ 		</td>	
+ 	</tr>
+ 	<%
     for (Property property : prop)
    		{%>
-	   <tr>
+	   <tr><td>
+	   		<div class="row">
+  					  <div class="col-sm-6 col-md-4">
+    					<div class="thumbnail">
+     						<img src = <%=property.getUrl()%> alt alt="Smiley face" height="40" width="40" > 
+     						  </div>
+ 							 </div>
+							</div>
+	   					</td>
 				<td><%=property.getAddress()%>		</td>
 				<td><%=property.getCity()%>			</td>
 				<td><%=property.getPropertyname()%>	</td>
 				<td><%=property.getPropertytype()%>	</td>
 				<td><%=property.getState()%>		</td>
 				<td><%=property.getZip()%>			</td>
-				<td><%=property.getGuiid()%>		</td>
+				<td><%=property.getPrice()%>		</td>
 			</tr>
 	   <%
    		}

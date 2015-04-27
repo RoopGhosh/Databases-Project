@@ -51,6 +51,12 @@ public class DAOProperty {
 		return em.find(Property.class, id);
 	}
 	
+	public List<Property> getAllProperty()
+	{
+		Query query = em.createQuery("select x from Property x");
+		return query.getResultList();
+	}
+	
 	
 	//finding Property using guiid
 	public List<Property> findPropertythruGuiid(String guiid)
@@ -154,13 +160,14 @@ public class DAOProperty {
 		return query.getResultList();
 	}
 	
-//	public static void main (String[] args)
-//	{
+	public static void main (String[] args)
+	{
 //		DAOProperty prop = new DAOProperty();
 //		List<Property> properties = prop.findPropertybyCity("boston");
 //		for (Property p : properties)
 //		{
 //			System.out.println(p.getPropertyname());
 //		}
-//	}
+		
+	}
 }

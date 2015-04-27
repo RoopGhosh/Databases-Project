@@ -38,6 +38,13 @@ public class DAOAgreement {
 
 	}
 	
+	public List<Agreement> getAllAgreement()
+	{
+		Query query = em.createQuery("select x from Agreement x");
+		return query.getResultList();
+	}
+	
+	
 	//search using a username
 	public List<Agreement> findAgreementByUser(String username)
 	{		

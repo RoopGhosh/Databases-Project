@@ -18,6 +18,7 @@ public class History {
 	private Integer commid;
 	private Integer queryid;
 	private Integer propertyid;
+	private String description;
 	public Integer getHistid() {
 		return histid;
 	}
@@ -54,8 +55,14 @@ public class History {
 	public void setPropertyid(Integer propertyid) {
 		this.propertyid = propertyid;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public History(Integer histid, String username, Date cdate, Integer commid,
-			Integer queryid, Integer propertyid) {
+			Integer queryid, Integer propertyid, String description) {
 		super();
 		this.histid = histid;
 		this.username = username;
@@ -63,8 +70,9 @@ public class History {
 		this.commid = commid;
 		this.queryid = queryid;
 		this.propertyid = propertyid;
+		this.description = description;
 	}
 	public History() {
 		super();
 	}
-}
+	}

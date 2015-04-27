@@ -14,6 +14,7 @@ import javax.persistence.SqlResultSetMapping;
 
 
 
+
 import edu.neu.aarambh.classes.*;
 
 public class DAOAmenity {
@@ -41,12 +42,12 @@ public class DAOAmenity {
 		//get the last primary key id from the table 
 		public int nextid()
 		{
-			return (1 + (Integer)em.createQuery("select max(u.amentiyid) from Amenity u").getSingleResult());
+			return (1 + (Integer)em.createQuery("select max(u.amenityid) from Amenity u").getSingleResult());
 
 		}
 		
 	// searching amenity table with type field
-	public List<Amenity> searchAmentityByType(String type)
+	public List<Amenity> findAmentityByType(String type)
 	{
 		Query query = em.createQuery("SELECT a  FROM Amenity a WHERE a.amentype LIKE :type" );
 		query.setParameter("type", type);
@@ -55,21 +56,28 @@ public class DAOAmenity {
 	}
 	
 	//searching amenity table using PK amenityid
-	public Amenity searchAmenityById(int id)
+	public Amenity findAmenityById(int id)
 	{
 		return em.find(Amenity.class, id);
 	}
 
+	public List<Amenity> getAllAmenity()
+	{
+		Query query = em.createQuery("select x from Amenity x");
+		return query.getResultList();
+	}
+	
 	
 	//main function
-	public static void main (String[] args)
-	{
-		DAOAmenity amen = new DAOAmenity();
-		List<Amenity> loa = amen.searchAmentityByType("newTypeAmen");
-		for(Amenity many : loa) {
-			System.out.println(many.getDescription());
-			}
-		DAOAmenity am = new DAOAmenity();
-		System.out.println(am.searchAmenityById(1).getAmentype());
-	}
+//	public static void main (String[] args)
+//	{
+//		DAOAmenity amen = new DAOAmenity();
+//		List<Amenity> loa = amen.findAmentityByType("newTypeAmen");
+//		for(Amenity many : loa) {
+//			System.out.println(many.getDescription());
+//			}
+//		DAOAmenity am = new DAOAmenity();
+//		System.out.println(am.findAmenityById(1).getAmentype());
+//		amen.insertNewAmentiy("sdfsdf", "sdfsdfs", "sdfsdf");
+//	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import edu.neu.aarambh.classes.Prop_amen_map;
+import edu.neu.aarambh.classes.Property;
 
 public class DAOProp_amen_map {
 
@@ -36,6 +37,11 @@ public class DAOProp_amen_map {
 		return query.getResultList();
 	}
 	
+	public List<Prop_amen_map> getAllProp_amen_map()
+	{
+		Query query = em.createQuery("select x from Prop_amen_map x");
+		return query.getResultList();
+	}
 	
 	//get the last primary key id from the table 
 	public int nextid()
