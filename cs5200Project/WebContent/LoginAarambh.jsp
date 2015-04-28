@@ -1,6 +1,6 @@
 <%@page import="edu.neu.aarambh.servelets.Webhitter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.*" import="java.sql.Date.*" import= "edu.neu.aarambh.classes.User" import="edu.neu.aarambh.classes.Property" import="edu.neu.aarambh.DAO.*" import="edu.neu.aarambh.servelets.Webhitter" %>
+    pageEncoding="ISO-8859-1" import="java.util.*" import="java.sql.Date.*" import= "edu.neu.aarambh.classes.*" import="edu.neu.aarambh.classes.Property" import="edu.neu.aarambh.DAO.*" import="edu.neu.aarambh.servelets.Webhitter" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -139,10 +139,10 @@ div#mapld {
 							</table>
 							</li>
 							<li><a href="login.jsp" target="_self">Login</a></li>
-							<li><a href="#RentingHomes">Renting Homes</a></li>
-							<li><a href="#AboutUs">About Us </a></li>
-							<li><a href="#Customers">Customers</a></li>
-							<li><a href="#Contact">Contact</a></li>
+							<!-- <li><a href="#RentingHomes">Renting Homes</a></li> -->
+							<li><a href="AboutUs.jsp">About Us </a></li>
+							<li><a href="Customers.jsp">Customers</a></li>
+							<li><a href="ContactUs.jsp">Contact</a></li>
 							<li><a href="#LogOut" onClick="logOutUser()">LogOut</a></li>
 							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
 								{
@@ -253,17 +253,46 @@ div#mapld {
 <!-- CREATING MAPS IN AARAMBH -->
 		  <div id="map" style="width: 600px; height: 450px;"></div>
   
+  
   <script>
- 
+  <% 
+  
+	 DAOProperty formap = new DAOProperty();
+	 List<Property> proplist = new  ArrayList<Property>();
+	 String inpfield;
+	 List<Integer> myList = new ArrayList<Integer>();
+	 DAOLocation ld = new DAOLocation();
+	 Location loki = new Location();
+	 if((request.getParameter("inp")) == null)
+	 {
+		 inpfield = "London";
+		 myList.add(0, 2);
+		 myList.add(1, 69);
+		 myList.add(2, 104);
+		 myList.add(3, 145);
+		 myList.add(4, 194);
+		 
+	 }
+	 else
+	 {
+	 	proplist = formap.findPropertybyCity(request.getParameter("inp"));
+	 	for( int i = 0 ; i < 11; i++)
+	 	{
+		 Property singleprop = proplist.get(i);
+		 myList.add(i, singleprop.getLocationid());
+		 //System.out.println(ld.findLocationbyLocationId(i).getLocname());
+	 }
+	 }
+	 %>
   
     // Define your locations: HTML content for the info window, latitude, longitude
-    var locations = [
-      ['<h4>London Property1</h4>', 51.49576187133789, -0.185589998960495],
-      ['<h4>London Property2</h4>', 51.496070861816406, -0.18262000381946564],
-      ['<h4>Birminghma property1</h4>', 52.421199798583984, -1.8943400382995605],
-      ['<h4>Birminghma property2</h4>', 52.41339874267578, -1.7721099853515625],
-      ['<h4>Homeboard in Middlesex</h4>', 51.65333938598633, -0.16464999318122864]
-    ];
+    var locations = [ 
+      [ '<%= ld.findLocationbyLocationId(myList.get(0)).getLocname() %>' , <%= ld.findLocationbyLocationId(myList.get(0)).getLatitude() %>, <%= ld.findLocationbyLocationId(myList.get(0)).getLongitude() %>],
+      [ '<%= ld.findLocationbyLocationId(myList.get(1)).getLocname() %>' , <%= ld.findLocationbyLocationId(myList.get(1)).getLatitude() %>, <%= ld.findLocationbyLocationId(myList.get(1)).getLongitude() %>],
+      [ '<%= ld.findLocationbyLocationId(myList.get(2)).getLocname() %>' , <%= ld.findLocationbyLocationId(myList.get(2)).getLatitude() %>, <%= ld.findLocationbyLocationId(myList.get(2)).getLongitude() %>],
+      [ '<%= ld.findLocationbyLocationId(myList.get(3)).getLocname() %>' , <%= ld.findLocationbyLocationId(myList.get(3)).getLatitude() %>, <%= ld.findLocationbyLocationId(myList.get(3)).getLongitude() %>],
+      [ '<%= ld.findLocationbyLocationId(myList.get(4)).getLocname() %>' , <%= ld.findLocationbyLocationId(myList.get(4)).getLatitude() %>, <%= ld.findLocationbyLocationId(myList.get(4)).getLongitude() %>],
+      ];
     
     // Setup the different icons and shadows
     var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
@@ -486,7 +515,7 @@ div#mapld {
 				<li><a href="SellProperty.jsp" class="nav_footer"> Post Property Ad </a></li>
 				<li><a href="AllProperty.jsp" class="nav_footer"> Our Properties </a></li>
 				<li><a href="AllLocation.jsp" class="nav_footer"> Our Location </a></li>
-				<li><a href="#" class="nav_footer"> Contact </a></li>
+				<li><a href="ContactUs.jsp" class="nav_footer"> Contact </a></li>
 			</ul>
 		</div>
   </div>	

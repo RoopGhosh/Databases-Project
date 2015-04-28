@@ -7,18 +7,18 @@
 
 <title>Customers</title>
 
-<link href="boot\css\bootstrap.css" rel="stylesheet"/>
-<link href="boot\css\bootstrap.min.css" rel="stylesheet"/>
-<link href="boot\css\bootstrap-responsive.css" rel="stylesheet"/>
-<link href="boot\css\bootstrap-responsive.min.css" rel="stylesheet"/>
-<link href="boot\css\style.css" rel="stylesheet"/>
-<link href="boot\js\bootstrap.js" rel="js"/>
-<link href="boot\js\bootstrap.min.js" rel="js"/>
-<link href="boot\js\jquery-1.11.2.min.js" rel="js"/>
+<link href="resource\css\bootstrap.css" rel="stylesheet"/>
+<link href="resource\css\bootstrap.min.css" rel="stylesheet"/>
+<link href="resource\css\bootstrap-responsive.css" rel="stylesheet"/>
+<link href="resource\css\bootstrap-responsive.min.css" rel="stylesheet"/>
+<link href="resource\css\style.css" rel="stylesheet"/>
+<link href="resource\js\bootstrap.js" rel="js"/>
+<link href="resource\js\bootstrap.min.js" rel="js"/>
+<link href="resource\js\jquery-1.11.2.min.js" rel="js"/>
 
 <!-- CSS FILE LINK AND JS FILE LINK FOR THE SLIDER -->
-    <link href="boot\js\js-image-slider.css" rel="stylesheet" type="text/css" />
-    <script src="boot\js\js-image-slider.js" type="text/javascript"></script>
+    <link href="resource\css\js-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="resource\js\js-image-slider.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 <div class="container">
 				<div id="header">
 					<div id="logo">
-						<a href=""><img src="boot/Images/logo.gif" width="147" height="78" alt="" border="0" /></a>
+						<a href=""><img src="resource/img/logo.gif" width="147" height="78" alt="" border="0" /></a>
 					</div>
 					<div class="banner_adds"></div>
 					<div class="menu">
@@ -55,11 +55,11 @@
 			<div class="div1" style="width: 100%; height: 450px">
 				<div id="slider">
 				<a href="" target="_blank">
-				<img src="boot/Images/img1.jpg" alt="" /></a>
-				<a class="lazyImage" href="boot/Images/img2.jpg" title="">t</a>
-				<b data-src="boot/Images/img3.jpg">Slider</b></a>
-				<a class="lazyImage" href="boot/Images/img4.jpg" title="">Slide</a>
-				<a class="lazyImage" href="boot/Images/img5.jpg" title=""></a>
+				<img src="resource/img/img1.jpg" alt="" /></a>
+				<a class="lazyImage" href="resource/img/img2.jpg" title="">t</a>
+				<b data-src="resource/img/img3.jpg">Slider</b></a>
+				<a class="lazyImage" href="resource/img/img4.jpg" title="">Slide</a>
+				<a class="lazyImage" href="resource/img/img5.jpg" title=""></a>
 				</div>
 			</div>
 <br>

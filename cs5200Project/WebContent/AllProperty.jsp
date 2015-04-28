@@ -18,6 +18,35 @@
 <title>Properties</title>
 </head>
 <body>
+
+<!--  HEADER FORMATTING ARAMBH -->
+<div id="main_container">
+<div class="container">
+				<div id="header">
+					<div id="logo">
+						<a href=""><img src="boot/Images/logo.gif" width="147" height="78" alt="" border="0" /></a>
+					</div>
+					<div class="banner_adds"></div>
+					<div class="menu">
+						<ul>
+							<li><a href="LoginAarambh.jsp">Home</a>
+							<table>
+							<tr>
+							<td></td>
+							</tr>
+							</table>
+							</li>
+							<li><a href="login.jsp" target="_self">Login</a></li>
+							<li><a href="AboutUs.jsp">About Us </a></li>
+							<li><a href="Customers.jsp">Our Customers</a></li>
+							<li></li>
+							<li><a href=#>Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+
+			
+<!--  IMAGE SLIDER IN ARAMBH -->
 	  <div id="well">
 
    <h1> APARTMENTS LIST</h1>

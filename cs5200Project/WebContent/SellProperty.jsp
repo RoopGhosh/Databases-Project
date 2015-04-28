@@ -64,9 +64,9 @@ function validate()
 							</li>
 							<li><a href="login.jsp" target="_self">Login</a></li>
 							<li><a href="#RentingHomes">Renting Homes</a></li>
-							<li><a href="#AboutUs">About Us </a></li>
-							<li><a href="#Customers">Customers</a></li>
-							<li><a href="#Contact">Contact</a></li>
+							<li><a href="AboutUs.jsp">About Us </a></li>
+							<li><a href="Customers.jsp">Customers</a></li>
+							<li><a href="ContactUs.jsp">Contact</a></li>
 							<li><a href="#LogOut" onClick="logOutUser()">LogOut</a></li>
 							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
 								{
@@ -213,11 +213,11 @@ function validate()
 		<div id="footer">
 			<ul class="footer_menu">
 				<li><a href="" class="nav_footer"> Home </a></li>
-				<li><a href="" class="nav_footer"> Selling Homes </a></li>
+				<!-- <li><a href="" class="nav_footer"> Selling Homes </a></li>
 				<li><a href="" class="nav_footer"> Buying Homes </a></li>
 				<li><a href="" class="nav_footer"> Renting Homes</a></li>
-				<li><a href="" class="nav_footer"> RSS </a></li>
-				<li><a href="" class="nav_footer"> Contact </a></li>
+				<li><a href="" class="nav_footer"> RSS </a></li> -->
+				<li><a href="ContactUs.jsp" class="nav_footer"> Contact </a></li>
 			</ul>
 		</div>
 </html>
