@@ -99,5 +99,14 @@ public class DAOComment {
 		return query.getResultList();
 	}
 	
+	/*public static void main (String[] args){
+		DAOComment comment = new DAOComment();
+		java.util.Date utilDate = new java.util.Date();
+		   java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		//int i = comment.insertNewComment("roop", 2, 10, "hello world", "header", sqlDate, 0);
+		//System comment.findCommentbyChild(14);
+		   System.out.println(comment.findCommentbyChild(14).get(0).getUsername());
+	}*/
+	
 	
 }

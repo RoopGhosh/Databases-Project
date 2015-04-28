@@ -46,7 +46,7 @@ public class DAOProperty {
 	
 	
 	//finding using the propertyID
-	public Property findPropertybyLocationId(int id)
+	public Property findPropertybyPropertyId(int id)
 	{
 		return em.find(Property.class, id);
 	}
@@ -125,6 +125,15 @@ public class DAOProperty {
 	{
 		Query query = em.createQuery("SELECT a  FROM Property a WHERE a.city LIKE :type" );
 		query.setParameter("type", arg);
+		//query.setParameter("field", field);
+		//query.setParameter("arg", arg);
+		return query.getResultList();
+	}
+	public List<Property> findPropertybyCityandType(String arg, String type)
+	{
+		Query query = em.createQuery("SELECT a  FROM Property a WHERE a.city LIKE :type and a.propertytype LIKE :type1" );
+		query.setParameter("type", arg);
+		query.setParameter("type1", type);
 		//query.setParameter("field", field);
 		//query.setParameter("arg", arg);
 		return query.getResultList();

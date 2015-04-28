@@ -113,7 +113,7 @@ public class Webhitter {
 	    	}
 	    
 	    DAOProperty newprop = new DAOProperty();
-	    return newprop.findPropertybyCity(searchString);
+	    return newprop.findPropertybyCityandType(searchString, listing_type);
   }
 
   private int insertnewAmenityandReturnId(String bathroom, String bedroom, String loc_name, String keywords)

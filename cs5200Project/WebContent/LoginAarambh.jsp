@@ -11,6 +11,7 @@
 
 <title>Aarambh - Login</title>
 
+<link href="resource\css\star.css" rel="stylesheet"/>
 <link href="resource\css\bootstrap.css" rel="stylesheet"/>
 <link href="resource\css\bootstrap.min.css" rel="stylesheet"/>
 <link href="resource\css\bootstrap-responsive.css" rel="stylesheet"/>
@@ -19,62 +20,18 @@
 <link href="resource\js\bootstrap.js" rel="js"/>
 <link href="resource\js\bootstrap.min.js" rel="js"/>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <!-- CSS FILE LINK AND JS FILE LINK FOR THE SLIDER -->
     <link href="resource\css\js-image-slider.css" rel="stylesheet" type="text/css" />
     <script src="resource\js\js-image-slider.js" type="text/javascript"></script>
     
- <!-- -->
- 
+
  <!-- SCRIPT FOR MAPS RENDERING  -->
 <script>
 
 var userName= localStorage.getItem("userName");
 
-
-// MAP RENDERING SCRIPT
-
-function initialize() {
-	var myLatlng = new google.maps.LatLng(51.7519, 1.2578);
-	var mapOptions = {
-    zoom: 6,
-    center: myLatlng
-  };
-
-  var map = new google.maps.Map(document.getElementById('mapld'),
-      mapOptions);
-
-//To add the marker to the map, use the 'map' property
-  var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title:"Current Location"
-  });
-}
-
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-      '&signed_in=true&callback=initialize';
-  document.body.appendChild(script);
-}
-
-     function toggleBounce() {
-
-	  if (marker.getAnimation() != null) {
-	    marker.setAnimation(null);
-	  } else {
-	    marker.setAnimation(google.maps.Animation.BOUNCE);
-	  }
-	}
- 
-
-window.onload = loadScript;
-
-
-
-// - > SEARCH VISIBILITY
 
      function setVisibility()
      {
@@ -93,80 +50,68 @@ window.onload = loadScript;
      		}
      		
      }
-     function logOutUser()
-     {
-    	 alert("Log Out");
+    
+     
+function logOutUser()
+ {
+    	 
     	 localStorage.clear();
     	 var userName= localStorage.getItem("userName");
-    	 alert("after logout"+userName);
     	 location.reload();
-     }
+    	 
+}
      
 
 
-		window.onload = loadScript();
+//window.onload = loadScript();
 
-// Comment
+// VISIBILITY OF LINKS
 
-     jQuery(document).ready(function() {
-    	 if(userName != null)
-    		{
-    			jQuery('#formdiv').show();
-    		
-    		}
-    	else
-    		{
-    		jQuery('#formdiv').hide();
-    		}
+jQuery(document).ready(function() 
+{
+	if(userName != null)
+	{	
+		alert(username);
+		document.getElementById("formdiv").style.visibility = 'visible';
+		jQuery('#formdiv').show();		
+	}
+	else
+	{
+		document.getElementById("formdiv").style.visibility = 'hidden';
+	jQuery('#formdiv').hide();
+	}
     	 
     	 
-    	 $("#sfl").hide();
-    	 $("#min").hide();
-    	 $("#max").hide();
-         $("#select").change(function(event) {
-        	 
-                    var selval=$("#select option:selected").text();
+$("#sfl").hide();
+$("#min").hide();
+$("#max").hide();
+$("#select").change(function(event) 
+		{
+        var selval=$("#select option:selected").text();
                     
-             	    if(selval === "City" ||selval === "State" ||selval === "Zip" ||selval === "Aminity")
-             	    {
-             	    	$("#sfl").show();
-             	    	
-             	    	
-             	    }
-             	    else if(selval === "Price")
-             	    {
-             	    	$("#min").show();
-             	    	$("#max").show();
-             	    }         
-            });
-         });
+        if(selval === "City" ||selval === "State" ||selval === "Zip" ||selval === "Aminity")
+        {
+          	$("#sfl").show();
+        }
+        else if(selval === "Price")
+        {
+            $("#min").show();
+            $("#max").show();
+        }         
+   });
+});
 
-    //
-    function abc()
-    {
-    	alert(document.getElementById("pol").innerHTML);
+//
+function abc()
+{
+   
+	alert(document.getElementById("pol").innerHTML);
     	
-    }
-    </script>
+}
+</script>
 </head>
+
 <body>
-
-
-	<script>
-
-// FOR REFRESHING THE EMBEDDED PAGE ON TIME INTERVALS 
-	//$(function(){
-     //   $('#mapld').load('http://www.somesitehere.com');
-    //});
-	
-	// TO RENDER MAP ON CLICK OF SEARCH
-	//$(document). ready(function(){
-	//	$('#submit'). click(function(){
-	//	$('#mapld'). load ("maps.html");
-	//	});
-	//	});
-
-	</script>
 
 <style type="text/css">
 div#mapld {
@@ -214,20 +159,6 @@ div#mapld {
 					</div>
 				</div>
 
-<script>
-function getusername()
-{
-	String ok;
-	if(localStorage.getItem("userName") != null)
-	{
-	ok = (localStorage.getItem("userName"));
-	}
-	else
-	{
-		ok = "";
-	}
-}
-</script>
 			
 <!--  IMAGE SLIDER IN ARAMBH -->
 			<br>
@@ -237,7 +168,7 @@ function getusername()
 				<a href="" target="_blank">
 				<img src="resource/img/img1.jpg" alt="" /></a>
 				<a class="lazyImage" href="resource/img/img2.jpg" title="">t</a>
-				<b data-src="resource/img/img3.jpg">Slider</b></a>
+				<b data-src="resource/img/img3.jpg">Slider</b>
 				<a class="lazyImage" href="resource/img/img4.jpg" title="">Slide</a>
 				<a class="lazyImage" href="resource/img/img5.jpg" title=""></a>
 				</div>
@@ -273,7 +204,7 @@ function getusername()
 			       
         	<select class="form-control" id="listing" name = "combolisting"  onchange="setVisibility()">
         	<option>buy</option>
-        	<option>rent</option>
+        	<option>let</option>
         	<option>share</option>
         	</select>
         	</div>
@@ -314,14 +245,107 @@ function getusername()
 			<a href="#" id="buyHm" class="nav_footer"> Buying Homes </a>
 			<a href="#" id= "rentHm" class="nav_footer"> Renting Homes</a>
 			</div> 
+	
 		</div>
 		</form>
   		</div>
  
 <!-- CREATING MAPS IN AARAMBH -->
+		  <div id="map" style="width: 600px; height: 450px;"></div>
+  
+  <script>
+ 
+  
+    // Define your locations: HTML content for the info window, latitude, longitude
+    var locations = [
+      ['<h4>London Property1</h4>', 51.49576187133789, -0.185589998960495],
+      ['<h4>London Property2</h4>', 51.496070861816406, -0.18262000381946564],
+      ['<h4>Birminghma property1</h4>', 52.421199798583984, -1.8943400382995605],
+      ['<h4>Birminghma property2</h4>', 52.41339874267578, -1.7721099853515625],
+      ['<h4>Homeboard in Middlesex</h4>', 51.65333938598633, -0.16464999318122864]
+    ];
+    
+    // Setup the different icons and shadows
+    var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+    
+    var icons = [
+      'http://localhost:8090/Aarambh/resource/img/home4.png',
+      iconURLPrefix + 'green-dot.png',
+      iconURLPrefix + 'blue-dot.png',
+      iconURLPrefix + 'orange-dot.png',
+      iconURLPrefix + 'purple-dot.png',
+      iconURLPrefix + 'pink-dot.png',      
+      iconURLPrefix + 'yellow-dot.png'
+    ]
+    var iconsLength = icons.length;
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: new google.maps.LatLng(-37.92, 151.25),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      streetViewControl: true,
+      panControl: true,
+      zoomControlOptions: {
+         position: google.maps.ControlPosition.RIGHT_TOP
+      }
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 160
+    });
+
+    var markers = new Array();
+    
+    var iconCounter = 0;
+    
+    // Add the markers and infowindows to the map
+    for (var i = 0; i < locations.length; i++) {  
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: icons[iconCounter]
+      });
+
+      markers.push(marker);
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+      
+      iconCounter++;
+      // We only have a limited number of possible icon colors, so we may have to restart the counter
+      if(iconCounter >= iconsLength) {
+      	iconCounter = 0;
+      }
+    }
+
+    function autoCenter() {
+      //  Create a new viewpoint bound
+      var bounds = new google.maps.LatLngBounds();
+      //  Go through each...
+      for (var i = 0; i < markers.length; i++) {  
+				bounds.extend(markers[i].position);
+      }
+      //  Fit these bounds to the map
+      map.fitBounds(bounds);
+    }
+    autoCenter();
+  </script> 
 		
-  		<div class="span8" id="mapld">
-  		</div>
+		
+		
+		
+		
+		
+  	<!--  	<div class="span8" id="mapld"> 
+  		</div> -->
+  		
+  		
+  		
 	</div>	
 	
 	<br>
@@ -333,14 +357,14 @@ function getusername()
    <br>
    
    
-  <table class="table table-bordered">   
+ 
    <% 
    
    	DAOProperty dao = new DAOProperty();
 	String st = request.getParameter("action");
 	String combo = request.getParameter("combo");
 	String listing_type = request.getParameter("combolisting");
-	System.out.println(combo);
+	//System.out.println(combo);
 	 Webhitter  web = new Webhitter();
 	 DAOProperty propDAO = new DAOProperty();
 	 List<Property> prop = new  ArrayList<Property>();
@@ -371,13 +395,13 @@ function getusername()
 	 switch (combo)
 	 {
 	 case "WebCity" :
-		 prop =  web.searchResults(request.getParameter("inp"), listing_type);
+		 prop =  web.searchResults(request.getParameter("inp"), request.getParameter("combolisting"));
 	 	break;
 	 case "State":
 		 prop =   propDAO.findPropertybyState(request.getParameter("inp"));
 	 	break;
 	 case "City" :
-		prop =   propDAO.findPropertybyCity(request.getParameter("inp"));
+		prop =   propDAO.findPropertybyCityandType(request.getParameter("inp"),request.getParameter("combolisting"));
 	 	break;
 	 case "Zip" :
 	 	prop = propDAO.findPropertybyZip(request.getParameter("inp"));
@@ -394,9 +418,13 @@ function getusername()
 	 //List<Property> prop =   propDAO.findPropertybyCity("London");  //web.searchResults(txtfield);
  	if ( prop.isEmpty())
  	{
- 		%> <td> <h1> NO DATA </h1></td><%
+ 		%> <h1> NO DATA </h1><%
  	}
+ 	else
+ 	{
  	%>
+ 	<table class="table table-hover">   
+ 	<thead>
  	<tr>
  		<td>
  			<b>Image</b>
@@ -423,37 +451,41 @@ function getusername()
  			<b>Price</b>
  		</td>	
  	</tr>
+ 	</thead>
+ 	<tbody>
  	<%
     for (Property property : prop)
    		{%>
 	   <tr><td>
 	   		<div class="row">
   					  <div class="col-sm-6 col-md-4">
-    					<div class="thumbnail">
-     						<img src = <%=property.getUrl()%> alt alt="Smiley face" height="40" width="40" > 
+    					<div class="thumbnail" style= "width:90px; align:right">
+     						<img src = <%=property.getUrl()%> alt="Smiley face" height="40" width="40" > 
      						  </div>
  							 </div>
 							</div>
 	   					</td>
 				<td><%=property.getAddress()%>		</td>
 				<td><%=property.getCity()%>			</td>
-				<td><%=property.getPropertyname()%>	</td>
+				<td><a href="Comments.jsp?propertyid=<%=property.getPropertyid()%>">
+        		<%=property.getPropertyname()%></a>
+        				</td>
 				<td><%=property.getPropertytype()%>	</td>
 				<td><%=property.getState()%>		</td>
 				<td><%=property.getZip()%>			</td>
 				<td><%=property.getPrice()%>		</td>
 			</tr>
-	   <%
-   		}
-   }  %>
+	   <%} } } %>
+  </tbody>
   </table>
   </div>
-  
-  <br>
+   <br>
   <div id="footer">
 			<ul class="footer_menu">
 				<li><a href="#" class="nav_footer"> Home </a></li>
-				<li><a href="#" class="nav_footer"> RSS </a></li>
+				<li><a href="SellProperty.jsp" class="nav_footer"> Post Property Ad </a></li>
+				<li><a href="AllProperty.jsp" class="nav_footer"> Our Properties </a></li>
+				<li><a href="AllLocation.jsp" class="nav_footer"> Our Location </a></li>
 				<li><a href="#" class="nav_footer"> Contact </a></li>
 			</ul>
 		</div>
