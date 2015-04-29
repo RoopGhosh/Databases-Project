@@ -295,6 +295,7 @@ div#mapld {
 			<a href="UpdateUser.jsp" id="buyHm" class="nav_footer"> <b> Update Profile </b> </a>
 			<a href="DisplayHistory.jsp" id="rentHm" class="nav_footer"><b> Display History</b></a>
 			<a href="MyProperties.jsp" id="myproperty" class="nav_footer"><b> My properties</b></a>
+			<a href="Interested.jsp" id="interested" class="nav_footer"><b> Interested</b></a>
 			</div> 
 	
 		</div>

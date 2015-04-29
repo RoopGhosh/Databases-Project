@@ -45,6 +45,22 @@ public class DAOShortlist {
 		}
 		
 		
+		//get propertyidlist by user
+		public ArrayList<Integer> getPropertyfromShortlistByUser(String username)
+		{
+			ArrayList<Integer> mylist = new ArrayList<Integer>();
+			Query query = em.createQuery("select u from Shortlist u where u.username LIKE :username");
+			query.setParameter("username", username);
+			List<Shortlist> stl = query.getResultList();
+			for (int i = 0; i< stl.size(); i++)
+			{
+				mylist.add(stl.get(i).getPropertyid());
+			}
+			return mylist;
+			
+		}
+		
+		
 		//getshorlist item by username and propertyid
 		public List<Shortlist> findbyusernameandpropertyid(String username, int propertyid)
 		{

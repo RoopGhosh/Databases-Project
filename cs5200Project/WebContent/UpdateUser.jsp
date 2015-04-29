@@ -44,6 +44,9 @@ $(document).ready(function()
 </head>
 
 <body>
+<%
+DAOUser user = new DAOUser();
+User u = user.getUserbyUsername(session.getAttribute("currentSessionUser").toString());%>
 <div id="main_container">
 	<div id="container">
 		
@@ -69,7 +72,7 @@ $(document).ready(function()
 
 		<div class="well">
 
-      		<form id="signup" class="form-horizontal" method="get" action="SignupServelet">
+      		<form id="signup" class="form-horizontal" method="get" action="UpdateUser.jsp">
         	<legend>Update Profile</legend>
         <fieldset disabled>
         		<div class="control-group">
@@ -88,7 +91,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-lock"></i></span>
-        					<input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password">
+        					<input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password", value=<%= u.getPassword() %>>
         			</div>
         		</div>
         </div>
@@ -98,7 +101,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-lock"></i></span>
-        				<input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="Re-enter Password">
+        				<input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="Re-enter Password", value=<%= u.getPassword() %>>
         			</div>
         		</div>
         </div>
@@ -108,7 +111,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-user"></i></span>
-        				<input type="text" class="input-xlarge" id="fname" name="fname" placeholder="First Name">
+        				<input type="text" class="input-xlarge" id="fname" name="fname" placeholder="First Name", value=<%= u.getFirstname() %>>
         			</div>
         		</div>
         </div>
@@ -118,7 +121,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-user"></i></span>
-        				<input type="text" class="input-xlarge" id="lname" name="lname" placeholder="Last Name">
+        				<input type="text" class="input-xlarge" id="lname" name="lname" placeholder="Last Name", value=<%= u.getLastname() %>>
         			</div>
         		</div>
         </div>
@@ -128,7 +131,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-user"></i></span>
-        				<input type="date" class="input-xlarge" id="dob" name="dob" placeholder="Date Of Birth">
+        				<input type="date" class="input-xlarge" id="dob" name="dob" placeholder="Date Of Birth", value=<%= u.getDob() %>>
         			</div>
         		</div>
         </div>
@@ -139,7 +142,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-envelope"></i></span>
-        				<input type="text" class="input-xlarge" id="email" name="email" placeholder="Email">
+        				<input type="text" class="input-xlarge" id="email" name="email" placeholder="Email", value=<%= u.getEmail() %>>
         			</div>
         		</div>
         </div>
@@ -149,7 +152,7 @@ $(document).ready(function()
         		<div class="controls">
         			<div class="input-prepend">
         					<span class="add-on"><i class="icon-lock"></i></span>
-        					<input type="number" id="phone" class="input-xlarge" name="phone" placeholder="Mobile / Landline">
+        					<input type="number" id="phone" class="input-xlarge" name="phone" placeholder="Mobile / Landline", value=<%= u.getPhnumber() %>>
         			</div>
         		</div>
        </div>
@@ -163,27 +166,51 @@ $(document).ready(function()
         		</div>
         </div>
         
+        <div class="control-group">
+        	<label class="control-label"></label>
+        		<div class="controls">
+        			<button type="submit" class="btn btn-info" id="deleteuser" name="delete" value="delete">Delete Profile</button>
+        		</div>
+        	</div>
+        
 		</form>
 		</div>
 		
 	<% 
 	String st = request.getParameter("action");
 	
+	if ("create".equals(st))
+	{
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		Date parsed;
+		parsed = format.parse(request.getParameter("dob"));
+	    java.util.Date utilDate = parsed;
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		DAOUser upuser = new DAOUser();
+		java.util.Date utilNewDate = new java.util.Date();
+ 	  	java.sql.Date newDate = new java.sql.Date(utilNewDate.getTime());
+ 	  	System.out.println(session.getAttribute("currentSessionUser").toString());
+ 	  	System.out.println(request.getParameter("passwd"));
+ 	  	System.out.println(request.getParameter("lname"));
+ 	  	System.out.println(sqlDate);
+ 	  	System.out.println(Integer.parseInt(request.getParameter("phone").toString()));
+		upuser.updateUser(session.getAttribute("currentSessionUser").toString(), request.getParameter("passwd"), request.getParameter("fname"), request.getParameter("lname"), sqlDate, Integer.parseInt(request.getParameter("phone").toString()), request.getParameter("email"));
+		DAOHistory daohist = new DAOHistory();
+		//daohist.insertNewHistory(session.getAttribute("currentSessionUser").toString(), newDate, 0, 0, 0, " Updated your profile");
+	}
 	
-		if ("create".equals(st))
-		{
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date parsed;
-			parsed = format.parse(request.getParameter("dob"));
-		    java.util.Date utilDate = parsed;
-	        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-			DAOUser upuser = new DAOUser();
-			java.util.Date utilNewDate = new java.util.Date();
-	 	  	java.sql.Date newDate = new java.sql.Date(utilNewDate.getTime());
-			upuser.updateUser(session.getAttribute("currentSessionUser").toString(), request.getParameter("passwd"), request.getParameter("fname"), request.getParameter("lname"), sqlDate, Integer.parseInt(request.getParameter("phone")), request.getParameter("email"));
-			DAOHistory daohist = new DAOHistory();
-			daohist.insertNewHistory(session.getAttribute("currentSessionUser").toString(), newDate, 0, 0, 0, " Updated your profile");
-		}
+	
+	if ("delete".equals(request.getParameter("delete")))
+	{	DAOUser upuser1 = new DAOUser();
+		System.out.println("from delete");
+		String usr = session.getAttribute("currentSessionUser").toString();
+		upuser1.deleteUser(usr);
+		session.setAttribute("currentSessionUser", null);
+		session.invalidate();
+		response.sendRedirect(response.encodeRedirectURL("login.jsp"));
+		
+		
+	}
 		
 		%>
 		<div id="footer">

@@ -96,7 +96,7 @@
    		 	</tr>
    <% DAOShortlist st = new DAOShortlist();
    ArrayList<Integer> propertyidlist = new ArrayList<Integer>();
-   propertyidlist = st.getPropertyIdfromShortlistByUser(session.getAttribute("currentSessionUser").toString());
+   propertyidlist = st.getPropertyfromShortlistByUser(session.getAttribute("currentSessionUser").toString());
    		for( int i = 0; i< propertyidlist.size(); i++)
    		{
    			DAOProperty prop = new DAOProperty(); 

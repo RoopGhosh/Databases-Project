@@ -16,7 +16,9 @@
 <link href="resource\js\bootstrap.min.js" rel="js"/>
 
 <script>
-jQuery(document).ready(function($){});
+jQuery(document).ready(function($){ 
+	 localStorage.clear();
+	 var userName= localStorage.getItem("userName");});
 
 <%-- function clickHere()
 {

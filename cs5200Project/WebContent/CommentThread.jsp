@@ -21,19 +21,6 @@
 
 
 <script>
-function display()
-{
-var val1= document.getElementById('rating1').checked;
-var val2= document.getElementById('rating2').checked;
-var val3= document.getElementById('rating3').checked;
-var val4= document.getElementById('rating4').checked;
-var val5= document.getElementById('rating5').checked;
-alert(val1);
-alert(val2);
-alert(val3);
-alert(val4);
-alert(val5);
-}
 
 </script>
 </head>
@@ -198,7 +185,8 @@ alert(val5);
 	
 	</div>
 	</form>
-
+</div>
+</div>
 	</div>
 </div>
 </body>

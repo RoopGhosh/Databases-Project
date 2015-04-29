@@ -22,22 +22,8 @@
 
 
 <script>
-function display()
-{
-var val1= document.getElementById('rating1').checked;
-var val2= document.getElementById('rating2').checked;
-var val3= document.getElementById('rating3').checked;
-var val4= document.getElementById('rating4').checked;
-var val5= document.getElementById('rating5').checked;
-alert(val1);
-alert(val2);
-alert(val3);
-alert(val4);
-alert(val5);
-}
-
-
 </script>
+
 </head>
 
 <body>
@@ -102,67 +88,71 @@ alert(val5);
 
 <br>
 <br>
-<br>
+<table class="table table-hover" id="tab">
+        <thead>
+        <tr>
+            <th>Property Attributes</th>
+            <th>Values</th>
+       </tr>
+       </thead>
+ 
+<tbody>
+<tr><td>
+<h3> Property Name &nbsp;&nbsp;&nbsp;</h3>
+</td>
+<td> <%=property.getPropertyname() %></td></tr>
 
-<div style="margin: 0 auto">
-<h1> Property Name :&nbsp;&nbsp;&nbsp; 
-<%=property.getPropertyname() %> </h1>
-</div>
-<br>
-<br>
+<tr><td>
+<h3> Address &nbsp;&nbsp;&nbsp;</h3> 
+</td><td>
+<%=property.getAddress() %> </td></tr>
 
-<div style="margin: 0 auto">
-<h1> Address :&nbsp;&nbsp;&nbsp; 
-
-<%=property.getAddress() %> </h1>
-</div>
-<br><br>
-<div style="margin: 0 auto">
-<h1> Description :&nbsp;&nbsp;&nbsp; 
+<tr><td>
+<h3> Description &nbsp;&nbsp;&nbsp;</h3>
+</td><td> 
 <%  DAOLocation loki = new DAOLocation();
 	Location location = loki.findLocationbyLocationId(property.getLocationid());%>
-	<%= location.getDescription()%> </h1>
-</div>
-<br> <br>
+	<%= location.getDescription()%> </td></tr>
 
-<div style="margin: 0 auto">
-<h1> Amenties :&nbsp;&nbsp;&nbsp; 
+<tr><td>
+<h3> Amenties &nbsp;&nbsp;&nbsp;</h3> 
+</td><td>
 <%  DAOAmenity amenity = new DAOAmenity();
 	Amenity amen = amenity.findAmenityById(property.getAmenityid());%>
 	<%= amen.getAmenname()%>
-	<%= amen.getDescription() %> </h1>
-</div>
-<br> <br>
-<div style="margin: 0 auto">
-<h1> City :&nbsp;&nbsp;&nbsp; 
+	<%= amen.getDescription() %> </td></tr>
 
-<%=property.getCity() %> </h1>
-</div>
-<br><br>
-<div style="margin: 0 auto">
-<h1> State :&nbsp;&nbsp;&nbsp; 
-<%=property.getState() %> </h1>
-</div>
-<br><br>
-<div style="margin: 0 auto">
-<h1> Zip :&nbsp;&nbsp;&nbsp; 
-<%=property.getZip() %> </h1>
-</div>
-<br><br>
-<div style="margin: 0 auto">
-<h1> Price :&nbsp;&nbsp;&nbsp; 
-<%=property.getPrice() %> </h1>
-</div>
-<br><br>
-<div style="margin: 0 auto">
-<h1> Average Property Rating:&nbsp;&nbsp;&nbsp; 
-<% DAORating dao = new DAORating();
-  Double avg = dao.getAverage(Integer.parseInt(session.getAttribute("propertyid").toString()));
-%>
-<%=avg %> </h1>
-</div>
+<tr><td>
+<h3> City &nbsp;&nbsp;&nbsp;</h3></td>
+<td> 
+
+<%=property.getCity() %></td></tr>
+
+<tr><td>
+<h3> State &nbsp;&nbsp;&nbsp;</h3>
+</td><td> 
+<%=property.getState() %> </td></tr>
+
+<tr><td>
+<h3> Zip &nbsp;&nbsp;&nbsp;</h3></td> 
+<td><%=property.getZip() %></td> </tr>
+
+<tr><td>
+<h3> Price &nbsp;&nbsp;&nbsp;</h3>
+</td><td> 
+<%=property.getPrice() %></td></tr>
+
+<tr><td>
+<h3> Average Property Rating:&nbsp;&nbsp;&nbsp;</h3></td> 
+<td><% DAORating dao = new DAORating();
+  Double avg = dao.getAverage(Integer.parseInt(session.getAttribute("propertyid").toString()));%>
+<%=avg %> </td></tr>
+
+</tbody>
+</table>
+
 <br>
-
+<br>
 
 
 <% 	

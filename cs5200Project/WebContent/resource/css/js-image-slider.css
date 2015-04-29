@@ -19,7 +19,7 @@
 
 #slider {
     float:left;
-	background:#fff url(loading.gif) no-repeat 50% 50%;
+	background:#fff url() no-repeat 50% 50%;
 	position:relative;
     transform: translate3d(0,0,0);
 }
@@ -78,7 +78,7 @@
 #slider div.loading 
 {
     width:100%; height:100%;
-    background:transparent url(loading.gif) no-repeat 50% 50%;
+    background:transparent url() no-repeat 50% 50%;
     filter: alpha(opacity=60);
     opacity:0.6;
     position:absolute;
