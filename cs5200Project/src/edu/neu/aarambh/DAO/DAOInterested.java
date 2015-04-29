@@ -17,7 +17,7 @@ public class DAOInterested {
 	EntityManager em = factory.createEntityManager();
 	
 	//inserting in the table
-		public int insertNewInterested(String querytitle, String querydesc, String quecategory, int minprice ,int maxprice, String location)
+		public int insertNewInterested(String querytitle, String querydesc, String username, int minprice ,int maxprice, String location)
 		{
 			Interested interested = new Interested();
 			interested.setQueryid(nextid());
@@ -25,7 +25,7 @@ public class DAOInterested {
 			interested.setLocation(location);
 			interested.setMaxprice(maxprice);
 			interested.setMinprice(minprice);
-			interested.setQuecategory(quecategory);
+			interested.setUsername(username);
 			interested.setQuerydesc(querydesc);
 			em.getTransaction().begin();
 			em.persist(interested);
@@ -39,10 +39,10 @@ public class DAOInterested {
 			return (1 + (Integer)em.createQuery("select max(u.queryid) from Interested u").getSingleResult());
 
 		}
-	public List<Interested> findQuerybycategory(String category)
+	public List<Interested> findQuerybyusername(String username)
 	{
-		Query query = em.createQuery("select q from Interested q WHERE q.quecategory LIKE :category");
-		query.setParameter("category", category);
+		Query query = em.createQuery("select q from Interested q WHERE q.username LIKE :category");
+		query.setParameter("category", username);
 		return query.getResultList();
 	}
 	

@@ -83,12 +83,19 @@ public class DAOComment {
 	}
 	
 	//finding children comment of a comment;
-	public List<Comment> findCommentbyChild(int id)
-	{
-		Query query = em.createQuery("select c from Comment c Where c.replyid LIKE :id");
-		query.setParameter("id", id);
-		return query.getResultList();
-	}
+		public List<Comment> findCommentbyChild(int id)
+		{
+			Query query = em.createQuery("select c from Comment c Where c.replyid LIKE :id");
+			query.setParameter("id", id);
+			return query.getResultList();
+		}
+		//return count of comment of a parent comment;
+		public int getCountofChild(int id)
+		{
+			Query query = em.createQuery("select c from Comment c Where c.replyid LIKE :id");
+			query.setParameter("id", id);
+			return query.getResultList().size();
+		}
 	
 	//finding comment between a range of date
 	public List<Comment> findCommentbyUsername(Date startDate, Date endDate)

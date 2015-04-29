@@ -85,9 +85,21 @@ public class DAORating {
 		return query.getResultList();
 	}
 	
-	public static void main (String[] args){
+	//get average rating of a rating for a given property
+	public Double getAverage(int id)
+	{
+		List<Rating> ratings = findRatingsbyPropertyId(id);
+		Double i = 0.0;
+		for (Rating r : ratings)
+		{
+			i  = i + (r.getRatingpts());
+		}
+		return (i / ratings.size());
+	}
+	
+	/*public static void main (String[] args){
 		DAORating dao = new DAORating();
 		dao.insertNewRating(1, "roop", 21, 0);
-	}
+	}*/
 	
 }

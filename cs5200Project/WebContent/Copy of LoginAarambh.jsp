@@ -216,7 +216,7 @@ div#mapld {
 		<div class="active"><h3>Find your Apartment</h3></div>
 		</div>
 		
-		<form action="LoginAarambh.jsp"> 
+		<form action="Copy of LoginAarambh.jsp"> 
 		<div class="form" style="width:100%">	
         
 		 	<div class="form_row">

@@ -12,7 +12,7 @@ public class Interested {
 	private Integer queryid;
 	private String querytitle;
 	private String querydesc;
-	private String quecategory;
+	private String username;
 	private Integer minprice;
 	private Integer maxprice;
 	private String location;
@@ -34,11 +34,11 @@ public class Interested {
 	public void setQuerydesc(String querydesc) {
 		this.querydesc = querydesc;
 	}
-	public String getQuecategory() {
-		return quecategory;
+	public String getUsername() {
+		return username;
 	}
-	public void setQuecategory(String quecategory) {
-		this.quecategory = quecategory;
+	public void setUsername(String Username) {
+		this.username = Username;
 	}
 	public Integer getMinprice() {
 		return minprice;
@@ -59,13 +59,13 @@ public class Interested {
 		this.location = location;
 	}
 	public Interested(Integer queryid, String querytitle, String querydesc,
-			String quecategory, Integer minprice, Integer maxprice,
+			String Username, Integer minprice, Integer maxprice,
 			String location) {
 		super();
 		this.queryid = queryid;
 		this.querytitle = querytitle;
 		this.querydesc = querydesc;
-		this.quecategory = quecategory;
+		this.username = Username;
 		this.minprice = minprice;
 		this.maxprice = maxprice;
 		this.location = location;

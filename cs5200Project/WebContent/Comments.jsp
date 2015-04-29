@@ -1,6 +1,7 @@
 <%@page import= "java.util.*"%>
 <%@page import= "edu.neu.aarambh.DAO.*" %>
 <%@page import= "edu.neu.aarambh.classes.*"%>
+<%@page import= "edu.neu.aarambh.servelets.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,44 +41,16 @@ alert(val5);
 </head>
 
 <body>
-
-<!--  HEADER FORMATTING ARAMBH -->
-<div id="main_container">
-<div class="container">
-				<div id="header">
-					<div id="logo">
-						<a href=""><img src="boot/Images/logo.gif" width="147" height="78" alt="" border="0" /></a>
-					</div>
-					<div class="banner_adds"></div>
-					<div class="menu">
-						<ul>
-							<li><a href="LoginAarambh.jsp">Home</a>
-							<table>
-							<tr>
-							<td></td>
-							</tr>
-							</table>
-							</li>
-							<li><a href="login.jsp" target="_self">Login</a></li>
-							<li><a href="AboutUs.jsp">About Us </a></li>
-							<li><a href="Customers.jsp">Our Customers</a></li>
-							<li></li>
-							<li><a href=#>Contact Us</a></li>
-						</ul>
-					</div>
-				</div>
-
-			
-<!--  IMAGE SLIDER IN ARAMBH -->
 <div class="container">
 <div id="header">
-					<div id="logo">
-						<a href=""><img src="resource/img/logo.gif" width="147" height="78" alt="" border="0" /></a>
-					</div>
-					<div class="banner_adds"></div>
-					<div class="menu">
-						<ul>
-							<li><a href="LoginAarambh.jsp">Home</a>
+	
+	<div id="logo">
+	<a href=""><img src="resource/img/logo.gif" width="147" height="78" alt="" border="0" /></a>
+	</div>
+	<div class="banner_adds"></div>
+	<div class="menu">
+		<ul>
+		<li><a href="LoginAarambh.jsp">Home</a>
 							<table>
 							<tr>
 							<td></td>
@@ -106,57 +79,151 @@ alert(val5);
 				</div>
 
 <br>
+<div align="center">
 <h1> PROPERTY DETAILS </h1>
-<table class="table table-hover" id="propertydeatails">
-<thead>
-        <tr>
-            <th>Address </th>
-            <th>City</th>
-            <th>Property Name</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Price</th>
-       </tr>
-       </thead>
-<%
-		if(request.getParameter("propertyid") != null)
-		{
-			session.setAttribute("propertyid", request.getParameter("propertyid"));
-		}
+</div>
+<br>
+<% 
+	if(request.getParameter("propertyid") != null)	
+	{
+		session.setAttribute("propertyid", request.getParameter("propertyid"));
+	}
 
-		int propertyid = Integer.parseInt(session.getAttribute("propertyid").toString());
-			
-		//var propertyId=request.getParameter('propertyid');
-		DAOProperty daoprop = new DAOProperty();
-		Property property = daoprop.findPropertybyPropertyId(propertyid);
-		%>
-		<tr>
-				<td><%=property.getAddress()%>		</td>
-				<td><%=property.getCity()%>			</td>
-				<td><%=property.getPropertyname()%>	</td>
-				<td><%=property.getState()%>		</td>
-				<td><%=property.getZip()%>			</td>
-				<td><%=property.getPrice()%>		</td>
-			</tr>
-</table>
+	int propertyid = Integer.parseInt(session.getAttribute("propertyid").toString());
+
+	DAOProperty daoprop = new DAOProperty();
+	Property property = daoprop.findPropertybyPropertyId(propertyid);
+   	String url = property.getUrl();
+    %>
+
+<br>
+
+<img src=<%=url %> alt="http://www.ht-real-estate.com/template/ht2014/images/landscape/05.jpg" style="width:1000px; height:400px; margin: 0 auto;">
+
+<br>
+<br>
+<br>
+
+<div style="margin: 0 auto">
+<h1> Property Name :&nbsp;&nbsp;&nbsp; 
+<%=property.getPropertyname() %> </h1>
+</div>
+<br>
+<br>
+
+<div style="margin: 0 auto">
+<h1> Address :&nbsp;&nbsp;&nbsp; 
+
+<%=property.getAddress() %> </h1>
+</div>
+<br><br>
+<div style="margin: 0 auto">
+<h1> Description :&nbsp;&nbsp;&nbsp; 
+<%  DAOLocation loki = new DAOLocation();
+	Location location = loki.findLocationbyLocationId(property.getLocationid());%>
+	<%= location.getDescription()%> </h1>
+</div>
+<br> <br>
+
+<div style="margin: 0 auto">
+<h1> Amenties :&nbsp;&nbsp;&nbsp; 
+<%  DAOAmenity amenity = new DAOAmenity();
+	Amenity amen = amenity.findAmenityById(property.getAmenityid());%>
+	<%= amen.getAmenname()%>
+	<%= amen.getDescription() %> </h1>
+</div>
+<br> <br>
+<div style="margin: 0 auto">
+<h1> City :&nbsp;&nbsp;&nbsp; 
+
+<%=property.getCity() %> </h1>
+</div>
+<br><br>
+<div style="margin: 0 auto">
+<h1> State :&nbsp;&nbsp;&nbsp; 
+<%=property.getState() %> </h1>
+</div>
+<br><br>
+<div style="margin: 0 auto">
+<h1> Zip :&nbsp;&nbsp;&nbsp; 
+<%=property.getZip() %> </h1>
+</div>
+<br><br>
+<div style="margin: 0 auto">
+<h1> Price :&nbsp;&nbsp;&nbsp; 
+<%=property.getPrice() %> </h1>
+</div>
+<br><br>
+<div style="margin: 0 auto">
+<h1> Average Property Rating:&nbsp;&nbsp;&nbsp; 
+<% DAORating dao = new DAORating();
+  Double avg = dao.getAverage(Integer.parseInt(session.getAttribute("propertyid").toString()));
+%>
+<%=avg %> </h1>
+</div>
+<br>
 
 
 
-   <% 	
-    	DAOComment dao = new DAOComment();
-    	java.util.Date utilDate = new java.util.Date();
+<% 	
+   		java.util.Date utilDate = new java.util.Date();
  	  	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
  	  	String st = request.getParameter("action");
-    	if ("create".equals(st))
+ 	  	DAOComment daoc = new DAOComment();
+    	if ("create".equals( request.getParameter("action")))
     	{
  	  	
+    		//INSERTION OF RATINGS
+       		
+        	DAORating ratdao = new DAORating();
+            String rat5 = request.getParameter("rating5");
+        	String rat4 = request.getParameter("rating4");
+        	String rat3 = request.getParameter("rating3");
+        	String rat2 = request.getParameter("rating2");
+        	String rat1 = request.getParameter("rating1"); 
+        	 int  publicval =  0;
+        	 if(request.getParameter("mkpublic") == "Y" ||request.getParameter("mkpublic") == "y")
+        	 {
+        		 publicval = 1;
+        		 
+        	 }
+        	 if(request.getParameter("mkpublic") == "N" ||request.getParameter("mkpublic") == "n")
+        	{
+        		publicval = 0; 
+        	}
+    		
+        	if(rat1 != null && rat1.equalsIgnoreCase("1"))
+        	{
+        		ratdao.insertNewRating(Integer.parseInt(session.getAttribute("propertyid").toString()),session.getAttribute("currentSessionUser").toString(), 1, publicval);
+        	}
+        	else if(rat2 != null && rat2.equalsIgnoreCase("2"))
+            {
+            		ratdao.insertNewRating(Integer.parseInt(session.getAttribute("propertyid").toString()),session.getAttribute("currentSessionUser").toString(), 2, publicval);
+            }
+        	else if(rat3 != null && rat3.equalsIgnoreCase("3"))
+            {
+            		ratdao.insertNewRating(Integer.parseInt(session.getAttribute("propertyid").toString()),session.getAttribute("currentSessionUser").toString(), 3, publicval);
+            }
+        	else if(rat4 != null && rat4.equalsIgnoreCase("4"))
+            {
+            		ratdao.insertNewRating(Integer.parseInt(session.getAttribute("propertyid").toString()),session.getAttribute("currentSessionUser").toString(), 4, publicval);
+            }
+        	else if(rat5 != null && rat5.equalsIgnoreCase("5"))
+            {
+            		ratdao.insertNewRating(Integer.parseInt(session.getAttribute("propertyid").toString()),session.getAttribute("currentSessionUser").toString(), 5, publicval);
+            }
+        	else 
+            {
+            		ratdao.insertNewRating(Integer.parseInt(session.getAttribute("propertyid").toString()),session.getAttribute("currentSessionUser").toString(), 0, publicval);
+            }
+         
+    		
  	  	if (request.getParameter("head") != null || request.getParameter("desc") != null || request.getParameter("username") != null)
     	{
-    		dao.insertNewComment(session.getAttribute("currentSessionUser").toString(), propertyid, 3, request.getParameter("head"), request.getParameter("desc"),sqlDate, 1);
+    		daoc.insertNewComment(session.getAttribute("currentSessionUser").toString(), propertyid, 3, request.getParameter("head"), request.getParameter("desc"),sqlDate, 1);	
     	}
     	}
-    	
-    	List<Comment> com = dao.findCommentbyproperty(propertyid);
+    	List<Comment> com = daoc.findCommentbyproperty(propertyid);
     	
     	if(com.isEmpty())
         {%>
@@ -168,11 +235,13 @@ alert(val5);
         	<table class="table table-hover" id="tab">
             <thead>
             <tr>
-                <th>Thread Number</th>
-                <th>Comment Header</th>
-                <th>Created By</th>
-                <th>Description</th>
-                <th>Created On</th>
+                <th><b>Thread Number</b></th>
+                <th><b>Comment Header</b></th>
+                <th><b>Created By</b></th>
+                <th><b>Description</b></th>
+                <th><b>Created On</b></th>
+            <!-- Comment Count Header Creation -->
+                <th><b>No Of Comments</b></th>
            </tr>
            </thead>
         <%
@@ -191,7 +260,19 @@ alert(val5);
 		<%=c.getCommdesc() %>
         </td><td>
 	    <%=c.getCommdte()%>
-        </td> </tr> <%} } } %>   
+        </td><td>
+
+        <% 
+     		// ADDING NEW COMMENTS FOR COMMENT COUNT
+        	List<Comment> c2 = daoc.findCommentbyChild( c.getCommentid());
+        	if(c2 == null)
+        	{ %>
+        		0
+        	<% }
+        	else
+        	{ %>
+        		<%= c2.size() %>
+       		<% } %></td> </tr> <% } } } %>   
      </tbody>
    </table>
 <br>
@@ -228,24 +309,38 @@ alert(val5);
 	 <p><h2> Rating &nbsp;</h2>
       	<span class="starRating">
         	
-        	<input id="rating5" type="radio" name="rating" value="5">
+        	<input id="rating5" type="radio" name="rating5" value="5">
         	<label for="rating5">5</label>
         
-        	<input id="rating4" type="radio" name="rating" value="4">
+        	<input id="rating4" type="radio" name="rating4" value="4">
         	<label for="rating4">4</label>
         
-        	<input id="rating3" type="radio" name="rating" value="3">
+        	<input id="rating3" type="radio" name="rating3" value="3">
         	<label for="rating3">3</label>
         
-        	<input id="rating2" type="radio" name="rating" value="2">
+        	<input id="rating2" type="radio" name="rating2" value="2">
         	<label for="rating2">2</label>
         
-        	<input id="rating1" type="radio" name="rating" value="1">
+        	<input id="rating1" type="radio" name="rating1" value="1">
         	<label for="rating1">1</label>
 
       	</span>
     </p>
     </div>
+	
+	<br>
+	
+	<div class="control-group">
+        	<label class="left"><b>Make Public</b> </label>
+        		<div class="controls">
+        			<div class="input-prepend">
+        			
+        					<span class="add-on"><i class="icon-lock"></i></span>
+        					<input type="text" id="public" class="input-xlarge" name="mkpublic" placeholder="Y/N">
+        			</div>
+        		</div>
+       </div>
+        	
 	
 		<div style="float: left; padding: 10px 25px 0 0;">
 		<button type="submit" class="btn btn-info" id="submit" name="action" value="create">Add Comment Thread</button>

@@ -28,7 +28,7 @@
 <div class="container">
 				<div id="header">
 					<div id="logo">
-						<a href=""><img src="boot/Images/logo.gif" width="147" height="78" alt="" border="0" /></a>
+						<a href=""><img src="resource/img/logo.gif" width="147" height="78" alt="" border="0" /></a>
 					</div>
 					<div class="banner_adds"></div>
 					<div class="menu">

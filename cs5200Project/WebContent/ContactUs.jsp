@@ -47,7 +47,6 @@
 							<li><a href="login.jsp" target="_self">Login</a></li>
 							<li><a href="AboutUs.jsp">About Us </a></li>
 							<li><a href="Customers.jsp">Our Customers</a></li>
-							<li></li>
 							<li><a href=#>Contact Us</a></li>
 						</ul>
 					</div>
@@ -72,11 +71,14 @@
 	
 <!--  Displaying list of Customers -->
 	<div class="container">
-	<h1>Contact Us:</h1>
+	<h1>Tell us What you want!</h1>
     <h3>Our mailing address:<br> roop@husky.neu.edu<br>
     133 Peterbourgh, Boston,<br>MA - 02215<br>
     In case of queries: support@aarambh.com<br></h3>
     </div>
+    
+    
+    
 <br>
 <br>
 
