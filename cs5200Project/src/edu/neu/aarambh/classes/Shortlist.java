@@ -9,14 +9,14 @@ public class Shortlist {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer Shortlistid;
+	private Integer shortlistid;
 	private String username;
 	private Integer propertyid;
 	public Integer getShortlistid() {
-		return Shortlistid;
+		return shortlistid;
 	}
 	public void setShortlistid(Integer shortlistid) {
-		Shortlistid = shortlistid;
+		this.shortlistid = shortlistid;
 	}
 	public String getUsername() {
 		return username;
@@ -32,12 +32,11 @@ public class Shortlist {
 	}
 	public Shortlist(Integer shortlistid, String username, Integer propertyid) {
 		super();
-		Shortlistid = shortlistid;
+		this.shortlistid = shortlistid;
 		this.username = username;
 		this.propertyid = propertyid;
 	}
 	public Shortlist() {
 		super();
 	}
-	
-}
+	}

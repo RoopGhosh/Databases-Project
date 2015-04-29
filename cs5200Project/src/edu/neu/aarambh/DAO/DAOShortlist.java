@@ -34,7 +34,7 @@ public class DAOShortlist {
 		//get the last primary key id from the table 
 		public int nextid()
 		{
-			return (1 + (Integer)em.createQuery("select max(u.shorlistid) from Shortlist u").getSingleResult());
+			return (1 + (Integer)em.createQuery("SELECT max(u.shortlistid) from Shortlist u").getSingleResult());
 
 		}
 		
@@ -44,18 +44,41 @@ public class DAOShortlist {
 			return query.getResultList();
 		}
 		
-	//returns the list of propertyid shortlisted by the user
-	public ArrayList<Integer> getPropertyIdfromShortlistByUser(String username)
-	{
-		Query query = em.createQuery("SELECT a  FROM Shortlist a WHERE a.username LIKE :type" );
-		query.setParameter("type", username);
-		//query.executeUpdate();
-		List<Rating> ratings = query.getResultList();
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		for(Rating rate : ratings)
+		
+		//getshorlist item by username and propertyid
+		public List<Shortlist> findbyusernameandpropertyid(String username, int propertyid)
 		{
-			array.add(rate.getPropertyid());
+			Query query = em.createQuery("SELECT a  FROM Shortlist a WHERE a.username LIKE :type AND a.propertyid LIKE :propertyid" );
+			query.setParameter("type", username);
+			query.setParameter("propertyid", propertyid);
+			return query.getResultList();
 		}
-		return array; 
+		
+		//returns the Count of hits of the given propertyid
+		public int countbyPropertyid(int propertyid)
+		{
+			Query query = em.createQuery("SELECT a FROM Shortlist a WHERE a.propertyid LIKE :type" );
+			query.setParameter("type", propertyid);
+			return query.getResultList().size();
+		}
+		
+		//returns the count of the properties 
+	
+	//deleting property
+	public void deleteMyProperty(String username, int id)
+	{
+		em.getTransaction().begin();
+		DAOShortlist shortlist = new DAOShortlist();
+	    Shortlist st = shortlist.findbyusernameandpropertyid(username, id).get(0);
+		Shortlist a = em.merge(st);
+	    em.remove(a);
+		em.getTransaction().commit();
+		System.out.println(st);
+	}
+	public static void main (String[] args)
+	{
+		DAOShortlist st = new DAOShortlist();
+		int o = st.countbyPropertyid(123);
+		System.out.println(o);
 	}
 }

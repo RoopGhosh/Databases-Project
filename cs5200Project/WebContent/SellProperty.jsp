@@ -100,7 +100,7 @@ function validate()
         					<div class="input-prepend">
         						<span class="add-on"><i class="icon-envelope"></i></span>
         						<input type="text" class="input-xlarge" id="propName" name="propName" placeholder="Name">
-        					</div>																																																																																																																									`3																			
+        					</div>																																																																																																																																												
         				</div>
         		</div>
         
@@ -121,6 +121,16 @@ function validate()
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-user"></i></span>
         				<input type="text" class="input-xlarge" id="address" name="address" placeholder="Flat/Street">
+        			</div>
+        		</div>
+        </div>
+        
+        <div class="control-group">
+        	<label class="control-label">Location Name</label>
+        		<div class="controls">
+        			<div class="input-prepend">
+        				<span class="add-on"><i class="icon-user"></i></span>
+        				<input type="text" class="input-xlarge" id="locname" name="locname" placeholder="Location Name">
         			</div>
         		</div>
         </div>
@@ -201,8 +211,15 @@ function validate()
 	String st = request.getParameter("action");
 	if ("create".equals (st))
 	   {
-		   
-       dao.insertNewProperty (request.getParameter("propName"), 12, request.getParameter("propType"), 2, request.getParameter("address"), request.getParameter("city"), request.getParameter("state"), request.getParameter("zip"), Integer.parseInt(request.getParameter("price")), request.getParameter("url"), "12");
+		   DAOLocation location = new DAOLocation();
+		   if (location.findLocationbyName(request.getParameter("locname").toString()).isEmpty())
+		   {
+			   int locationid = location.insertNewLocation(request.getParameter("locname"),request.getParameter("address"), 0.0, 0.0, request.getParameter("city"), request.getParameter("state"), request.getParameter("zip"));
+			   int id = dao.insertNewProperty (request.getParameter("propName"), locationid, request.getParameter("propType"), 2, request.getParameter("address"), request.getParameter("city"), request.getParameter("state"), request.getParameter("zip"), Integer.parseInt(request.getParameter("price")), request.getParameter("url"), "guiid");
+			   DAOShortlist shortlist = new DAOShortlist();
+		       shortlist.insertNewShortlist(session.getAttribute("currentSessionUser").toString(), id);
+		   }
+       
 }%>
 	</div>
 </div>

@@ -27,6 +27,23 @@
 <!-- SCRIPT AND CSS FOR THE NEW TABLE FAVOURITES -->
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
+<!-- script for AJAX mapping over URL -->
+<script>
+        $(document).ready(function() {
+
+                $('.ajax-link').click(function() {
+                       // $('.page-content').hide();
+                        var category = $(this).attr("data-category");
+                       // the URL for the request
+                        $.get('ajaxAction', {
+                                // Parameter to be sent to server side
+                                category : category
+                        });
+                });
+        });
+</script>
+
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -277,6 +294,7 @@ div#mapld {
 			<a href="SellProperty.jsp" id="sellHm" class="nav_footer"> <b>Post Property Ad </b></a>
 			<a href="UpdateUser.jsp" id="buyHm" class="nav_footer"> <b> Update Profile </b> </a>
 			<a href="DisplayHistory.jsp" id="rentHm" class="nav_footer"><b> Display History</b></a>
+			<a href="MyProperties.jsp" id="myproperty" class="nav_footer"><b> My properties</b></a>
 			</div> 
 	
 		</div>
@@ -298,6 +316,7 @@ div#mapld {
    	</div>
    <br>
    <%   
+   DAOShortlist daoshortlist = new DAOShortlist();
    	DAOProperty dao = new DAOProperty();
 	String st = request.getParameter("action");
 	String combo = request.getParameter("combo");
@@ -420,6 +439,15 @@ div#mapld {
 			<td><%=property.getState()%>		</td>
 			<td><%=property.getZip()%>			</td>
 			<td><%=property.getPrice()%>		</td>
+			<%-- <td><a href="#" class="ajax-link" data-category= <%= property.getPropertyid() %>>SHORTLIST</a> --%>
+			<td>
+			
+<div class="list-group">
+    <a href="#" class="ajax-link active" data-category= <%= property.getPropertyid() %> SHORLIST/>
+        <span class="glyphicon glyphicon-file"></span> SHORLISTED <span class="badge"><%= daoshortlist.countbyPropertyid(property.getPropertyid()) %></span>
+   
+</div>
+			</td>
 			 <!--	<td><input type="button" onClick="test2()" value="Show Table" id="showTable"/>
 				</td>  -->
 			</tr>

@@ -62,14 +62,22 @@ public class DAOLocation {
 	}
 	
 	//finding using latitude and longitude
-	public List<Location> findLocationbyLatlong(Double latitude, Double longitude)
-	{
-		Query query = em.createQuery("select x from Location x where x.latitude LIKE :latitude and x.longitude LIKE :longitude");
-		query.setParameter("latitude", latitude);
-		query.setParameter("longitude", longitude);
-		return query.getResultList();
-	}
-	
+		public List<Location> findLocationbyLatlong(Double latitude, Double longitude)
+		{
+			Query query = em.createQuery("select x from Location x where x.latitude LIKE :latitude and x.longitude LIKE :longitude");
+			query.setParameter("latitude", latitude);
+			query.setParameter("longitude", longitude);
+			return query.getResultList();
+		}
+		
+		//finding using propertyname
+		public List<Location> findLocationbyName(String name)
+		{
+			Query query = em.createQuery("select x from Location x where x.locname LIKE :name");
+			query.setParameter("name", name);
+			return query.getResultList();
+		}
+		
 	//finding location using zip
 	public List<Location> findLocationbyZip(int zip)
 	{
