@@ -29,28 +29,12 @@
 <!-- SCRIPT AND CSS FOR THE NEW TABLE FAVOURITES -->
 <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-<!-- script for AJAX mapping over URL -->
-<script>
-        $(document).ready(function() {
-
-                $('.ajax-link').click(function() {
-                       // $('.page-content').hide();
-                        var category = $(this).attr("data-category");
-                       // the URL for the request
-                        $.get('ajaxAction', {
-                                // Parameter to be sent to server side
-                                category : category
-                        });
-                });
-        });
-</script>
-
-
 
 <script type="text/javascript">
 $(document).ready(function() {
  $("#tablediv").hide();
  $("#formdiv123").hide();
+ $('.page-content').hide();
  var userName= localStorage.getItem("userName");
  if(userName != null && userName != "")
 	{	
@@ -87,6 +71,22 @@ $(document).ready(function() {
               });           $("#tablediv").show();         
   });     
 });
+</script>
+
+<!-- script for AJAX mapping over URL -->
+<script>
+        $(document).ready(function() {
+
+                $('.ajax-link').click(function() {
+                        //$('.page-content').show();
+                        var category = $(this).attr("data-category");
+                       // the URL for the request
+                        $.get('ajaxAction', {
+                                // Parameter to be sent to server side
+                                category : category
+                        });
+                });
+        });
 </script>
 
 <!-- CSS FILE LINK AND JS FILE LINK FOR THE SLIDER -->
@@ -446,7 +446,9 @@ div#mapld {
 <div class="list-group">
     <a href="#" class="ajax-link active" data-category= <%= property.getPropertyid() %> SHORLIST/>
         <span class="glyphicon glyphicon-file"></span> SHORLISTED <span class="badge"><%= daoshortlist.countbyPropertyid(property.getPropertyid()) %></span>
-   
+   <div class="page-content">
+                        <h3>ohhhhhhhh</h3>
+                </div>
 </div>
 			</td>
 			 <!--	<td><input type="button" onClick="test2()" value="Show Table" id="showTable"/>

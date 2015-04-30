@@ -86,7 +86,7 @@ function logOutUser()
 					<div class="banner_adds"></div>
 					<div class="menu">
 						<ul>
-							<li><a href="#">Home</a>
+							<li><a href="LoginAarambh.jsp">Home</a>
 							<table>
 							<tr>
 							<td></td>
@@ -136,7 +136,7 @@ function logOutUser()
         
              
         <div class="control-group">
-        	<label class="control-label">Property Type</label>
+        	<label class="control-label">Rent/Share/Buy</label>
         		<div class="controls">
         			<div class="input-prepend">
         				<span class="add-on"><i class="icon-lock"></i></span>

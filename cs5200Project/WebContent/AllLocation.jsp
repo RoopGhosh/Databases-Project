@@ -96,9 +96,9 @@ function logOutUser()
 				<div id="slider">
 				<a href="" target="_blank">
 				<img src="resource/img/img1.jpg" alt="" /></a>
-				<a class="lazyImage" href="resource/img/img2.jpg" title="">t</a>
-				<b data-src="resource/img/img3.jpg">Slider</b>
-				<a class="lazyImage" href="resource/img/img4.jpg" title="">Slide</a>
+				<a class="lazyImage" href="resource/img/img2.jpg" title=""></a>
+				<b data-src="resource/img/img3.jpg"></b>
+				<a class="lazyImage" href="resource/img/img4.jpg" title=""></a>
 				<a class="lazyImage" href="resource/img/img5.jpg" title=""></a>
 				</div>
 			</div>
@@ -109,21 +109,23 @@ function logOutUser()
 </div>
 <div class="form-row">
 <table class="table table-bordered">
-<th>
+<thead>
+<tr>
 <%
   int i=0;
   DAOLocation location = new DAOLocation();
   List<Location> list = location.getAllLocation();
 %>
-<td> SNO</td>
-<td> Name</td>
-<td> Description</td>
-<td> Latitude</td>
-<td> Longitude</td>
-<td> City</td>
-<td> State</td>
-<td> Zip</td>
-</th>
+<td><b> SNO</b></td>
+<td><b> Name</b></td>
+<td> <b>Description</b></td>
+<td><b> Latitude</b></td>
+<td> <b>Longitude</b></td>
+<td> <b>City</b></td>
+<td> <b>State</b></td>
+<td> <b>Zip</b></td>
+</tr>
+</thead>
 <% for (Location loc : list) 
 {%>		
 	<tr>

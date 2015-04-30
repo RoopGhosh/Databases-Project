@@ -65,7 +65,7 @@ function logOutUser()
 					<div class="banner_adds"></div>
 					<div class="menu">
 						<ul>
-							<li><a href="#">Home</a>
+							<li><a href="LoginAarambh.jsp">Home</a>
 							<table>
 							<tr>
 							<td></td>
