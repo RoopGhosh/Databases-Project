@@ -16,6 +16,33 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Properties</title>
+<script type="text/javascript">
+$(document).ready(function() {
+ $("#formdiv123").hide();
+  var userName= localStorage.getItem("userName");
+ if(userName != null && userName != "")
+	 {
+		jQuery("#formdiv123").show();
+		jQuery("#logout").show();
+		jQuery("#login").hide();
+	}
+	else
+	{
+	jQuery("#formdiv123").hide();
+	jQuery("#logout").hide();
+	jQuery("#login").show();
+	}   
+});
+
+function logOutUser()
+{
+   	 
+   	 localStorage.clear();
+   	 var userName= localStorage.getItem("userName");
+   	 location.reload();	 
+}
+    
+</script>
 </head>
 <body>
 
@@ -29,26 +56,49 @@
 					<div class="banner_adds"></div>
 					<div class="menu">
 						<ul>
-							<li><a href="LoginAarambh.jsp">Home</a>
+							<li><a href="#">Home</a>
 							<table>
 							<tr>
 							<td></td>
 							</tr>
 							</table>
 							</li>
-							<li><a href="login.jsp" target="_self">Login</a></li>
 							<li><a href="AboutUs.jsp">About Us </a></li>
 							<li><a href="Customers.jsp">Our Customers</a></li>
-							<li></li>
-							<li><a href=#>Contact Us</a></li>
+							<li><a href="AllLocation.jsp">Our Locations</a></li>
+							<li><a href="ContactUs.jsp">Contact Us</a></li>
+							<li id="login"><a href="login.jsp" target="_self">Login</a></li>
+							<li id="logout" style="display:none"><a href="#LogOut" onClick="logOutUser()" id="logout">LogOut</a></li>
+							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
+								{
+								document.write(localStorage.getItem("userName"));
+								}
+								else
+								{
+									//document.write("No User");
+								}
+							</script></li>
+							
+							
 						</ul>
 					</div>
 				</div>
 
 			
 <!--  IMAGE SLIDER IN ARAMBH -->
-	  <div id="well">
-
+			<br>
+		
+			<div class="div1" style="width: 100%; height: 450px">
+				<div id="slider">
+				<a href="" target="_blank">
+				<img src="resource/img/img1.jpg" alt="" /></a>
+				<a class="lazyImage" href="resource/img/img2.jpg" title=""></a>
+				<b data-src="resource/img/img3.jpg"></b>
+				<a class="lazyImage" href="resource/img/img4.jpg" title=""></a>
+				<a class="lazyImage" href="resource/img/img5.jpg" title=""></a>
+				</div>
+			</div>
+			<br>	
    <h1> APARTMENTS LIST</h1>
    <br>
    
@@ -123,6 +173,19 @@
    					</tr>
    			   <%
    		   		}  %>
-
+</table>
+</div>
+</div>
 </body>
+<div id="footer" >
+ 
+			<ul class="footer_menu" id="formdiv123">
+			<li><a href="SellProperty.jsp" id="sellHm" class="nav_footer" style="weight:bold"> <b>Post Ad </b></a></li>
+			<li><a href="UpdateUser.jsp" id="buyHm" class="nav_footer" style="weight:bold"> <b> Maintain Profile </b> </a></li>
+			<li><a href="DisplayHistory.jsp" id="rentHm" class="nav_footer" style="weight:bold"><b> History</b></a></li>
+			<li><a href="MyProperties.jsp" id="myproperty" class="nav_footer" style="weight:bold"><b> Favourites</b></a></li>
+			<li><a href="Interested.jsp" id="interested" class="nav_footer" style="weight:bold"><b> Interested</b></a></li>
+			<li><a href="AllProperties.jsp" id="interested" class="nav_footer" style="weight:bold"><b> All Properties</b></a></li>
+			</ul>
+</div> 
 </html>

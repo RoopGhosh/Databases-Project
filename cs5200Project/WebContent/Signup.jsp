@@ -164,17 +164,6 @@ $(document).ready(function()
         
 		</form>
 		</div>
-		
-		<div id="footer">
-			<ul class="footer_menu">
-				<li><a href="" class="nav_footer"> Home </a></li>
-				<li><a href="" class="nav_footer"> Selling Homes </a></li>
-				<li><a href="" class="nav_footer"> Buying Homes </a></li>
-				<li><a href="" class="nav_footer"> Renting Homes</a></li>
-				<li><a href="" class="nav_footer"> RSS </a></li>
-				<li><a href="" class="nav_footer"> Contact </a></li>
-			</ul>
-		</div>
 	</div>
 </div>
 

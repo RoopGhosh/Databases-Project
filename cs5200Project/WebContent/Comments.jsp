@@ -19,9 +19,32 @@
 <link href="resource\js\bootstrap.min.js" rel="js"/>
 <link href="resource\js\jquery-1.11.2.min.js" rel="js"/>
 <link href="resource\css\star.css" rel="stylesheet"/>
+<script type="text/javascript">
+$(document).ready(function() {
+ $("#formdiv123").hide();
+  var userName= localStorage.getItem("userName");
+ if(userName != null && userName != "")
+	 {
+		jQuery("#formdiv123").show();
+		jQuery("#logout").show();
+		jQuery("#login").hide();
+	}
+	else
+	{
+	
+	jQuery("#formdiv123").hide();
+	jQuery("#logout").hide();
+	jQuery("#login").show();
+	}   
+});
 
-
-<script>
+function logOutUser()
+{
+   	 
+   	 localStorage.clear();
+   	 var userName= localStorage.getItem("userName");
+   	 location.reload();	 
+}
 </script>
 
 </head>
@@ -43,15 +66,14 @@
 							</tr>
 							</table>
 							</li>
-							<li><a href="login.jsp" target="_self">Login</a></li>
-							<li><a href="#RentingHomes">Renting Homes</a></li>
-							<li><a href="#AboutUs">About Us </a></li>
-							<li><a href="#Customers">Customers</a></li>
-							<li><a href="#Contact">Contact</a></li>
-							<li><a href="#LogOut" onClick="logOutUser()">LogOut</a></li>
+							<li><a href="AboutUs.jsp">About Us </a></li>
+							<li><a href="Customers.jsp">Our Customers</a></li>
+							<li><a href="AllLocation.jsp">Our Locations</a></li>
+							<li><a href="ContactUs.jsp">Contact Us</a></li>
+							<li id="login"><a href="login.jsp" target="_self">Login</a></li>
+							<li id="logout" style="display:none"><a href="#LogOut" onClick="logOutUser()" id="logout">LogOut</a></li>
 							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
 								{
-								
 								document.write(localStorage.getItem("userName"));
 								}
 								else
@@ -342,4 +364,15 @@
 	</div>
 </div>
 </body>
+<div id="footer" >
+ 
+			<ul class="footer_menu" id="formdiv123">
+			<li><a href="SellProperty.jsp" id="sellHm" class="nav_footer" style="weight:bold"> <b>Post Ad </b></a></li>
+			<li><a href="UpdateUser.jsp" id="buyHm" class="nav_footer" style="weight:bold"> <b> Maintain Profile </b> </a></li>
+			<li><a href="DisplayHistory.jsp" id="rentHm" class="nav_footer" style="weight:bold"><b> History</b></a></li>
+			<li><a href="MyProperties.jsp" id="myproperty" class="nav_footer" style="weight:bold"><b> Favourites</b></a></li>
+			<li><a href="Interested.jsp" id="interested" class="nav_footer" style="weight:bold"><b> Interested</b></a></li>
+			<li><a href="AllProperties.jsp" id="interested" class="nav_footer" style="weight:bold"><b> All Properties</b></a></li>
+			</ul>
+</div> 
 </html>	

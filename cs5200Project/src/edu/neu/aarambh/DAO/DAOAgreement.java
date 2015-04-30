@@ -77,10 +77,10 @@ public class DAOAgreement {
 		em.persist(agreement);
 		em.getTransaction().commit();
 	}
-	/*public static void main (String[] args)
+	public static void main (String[] args)
 	{
 		DAOAgreement agree = new DAOAgreement();
-		//agree.createNewAggrement(1,"hello there", "roop", 1);
+		agree.createNewAggrement(10,"hello there", "roop", 1);
 		List<Agreement> ag = agree.findAgreementByUser("roop");
-	}*/
+	}
 }

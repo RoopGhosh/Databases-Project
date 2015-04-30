@@ -14,6 +14,7 @@
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <link href="resource\css\style.css" rel="stylesheet"/>
 
 <link href="resource\js\bootstrap.js" rel="js"/>
@@ -43,34 +44,63 @@ function validate()
 	}
 	
 </script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ $("#formdiv123").hide();
+  var userName= localStorage.getItem("userName");
+ if(userName != null && userName != "")
+	 {
+		jQuery("#formdiv123").show();
+		jQuery("#logout").show();
+		jQuery("#login").hide();
+	}
+	else
+	{
+	jQuery("#formdiv123").hide();
+	jQuery("#logout").hide();
+	jQuery("#login").show();
+	}   
+});
+
+function logOutUser()
+{
+   	 
+   	 localStorage.clear();
+   	 var userName= localStorage.getItem("userName");
+   	 location.reload();	 
+}
+    
+</script>
+
 </head>
 <body>
+
+<!--  HEADER FORMATTING ARAMBH -->
 <div id="main_container">
-	<div id="container">
-		
-		<div id="header">
+<div class="container">
+				<div id="header">
 					<div id="logo">
 						<a href=""><img src="resource/img/logo.gif" width="147" height="78" alt="" border="0" /></a>
 					</div>
 					<div class="banner_adds"></div>
 					<div class="menu">
 						<ul>
-							<li><a href="">Home</a>
+							<li><a href="#">Home</a>
 							<table>
 							<tr>
 							<td></td>
 							</tr>
 							</table>
 							</li>
-							<li><a href="login.jsp" target="_self">Login</a></li>
-							<li><a href="#RentingHomes">Renting Homes</a></li>
 							<li><a href="AboutUs.jsp">About Us </a></li>
-							<li><a href="Customers.jsp">Customers</a></li>
-							<li><a href="ContactUs.jsp">Contact</a></li>
-							<li><a href="#LogOut" onClick="logOutUser()">LogOut</a></li>
+							<li><a href="Customers.jsp">Our Customers</a></li>
+							<li><a href="AllLocation.jsp">Our Locations</a></li>
+							<li><a href="ContactUs.jsp">Contact Us</a></li>
+							<li id="login"><a href="login.jsp" target="_self">Login</a></li>
+							<li id="logout" style="display:none"><a href="#LogOut" onClick="logOutUser()" id="logout">LogOut</a></li>
 							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
 								{
-								
 								document.write(localStorage.getItem("userName"));
 								}
 								else
@@ -226,15 +256,15 @@ function validate()
 
 
 </body>
-
-		<div id="footer">
-			<ul class="footer_menu">
-				<li><a href="" class="nav_footer"> Home </a></li>
-				<!-- <li><a href="" class="nav_footer"> Selling Homes </a></li>
-				<li><a href="" class="nav_footer"> Buying Homes </a></li>
-				<li><a href="" class="nav_footer"> Renting Homes</a></li>
-				<li><a href="" class="nav_footer"> RSS </a></li> -->
-				<li><a href="ContactUs.jsp" class="nav_footer"> Contact </a></li>
+<div id="footer" >
+ 
+			<ul class="footer_menu" id="formdiv123">
+			<li><a href=# id="sellHm" class="nav_footer" style="weight:bold"> <b>Post Ad </b></a></li>
+			<li><a href="UpdateUser.jsp" id="buyHm" class="nav_footer" style="weight:bold"> <b> Maintain Profile </b> </a></li>
+			<li><a href="DisplayHistory.jsp" id="rentHm" class="nav_footer" style="weight:bold"><b> History</b></a></li>
+			<li><a href="MyProperties.jsp" id="myproperty" class="nav_footer" style="weight:bold"><b> Favourites</b></a></li>
+			<li><a href="Interested.jsp" id="interested" class="nav_footer" style="weight:bold"><b> Interested</b></a></li>
+			<li><a href="AllProperties.jsp" id="interested" class="nav_footer" style="weight:bold"><b> All Properties</b></a></li>
 			</ul>
-		</div>
+</div> 
 </html>

@@ -14,7 +14,7 @@ var sliderOptions=
 	captionEffect: "rotate",
 	thumbnailsWrapperId: "thumbs",
 	m: false,
-	license: "mylicense"
+	license: ""
 };
 
 var imageSlider=new mcImgSlider(sliderOptions);

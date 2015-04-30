@@ -54,67 +54,70 @@ public class Webhitter {
 	    org.json.JSONArray listings = reponse.getJSONArray("listings");
 	    System.out.println(listings.length());
 	    for (int i = 0 ; i < listings.length(); i++)
-	    	{
-		    	Double latitude = listings.getJSONObject(i).getDouble("latitude");
-	    		Double longitude = listings.getJSONObject(i).getDouble("longitude");
-	    		String propertytype = listings.getJSONObject(i).getString("listing_type");
-	    		Geocoder geocode = new Geocoder();
-	    		Geocoder newgeo = geocode.latlong2Address(latitude, longitude);
-	    		String address = newgeo.getAddress();
-	    		String city = searchString;
-	    				/*newgeo.getCity();*/
-	    		String state = newgeo.getCountry();
-	    		String zip = newgeo.getZip();
-	    		String locname = listings.getJSONObject(i).getString("datasource_name");
-	    		String loc_desc = listings.getJSONObject(i).getString("property_type");
-	    		String propertyname = listings.getJSONObject(i).getString("title");
-	    		String bath;
-	    		String bed;
-	    		Integer bathroom, bedroom;
-	    		
-	    		try {
-	    			 bathroom = listings.getJSONObject(i).getInt("bathroom_number");
-	    			 bath = bathroom.toString();
-	    		} catch (JSONException e) {
-	    			 bath = "";
-	    		} 
-	    		try {
-	    			 bedroom = listings.getJSONObject(i).getInt("bedroom_number");
-	    			 bed = bedroom.toString();
-	    		} catch (JSONException e) {
-	    			 bed = "";
-	    		} 
-	    		
-	    		
-	    		
-	    		//Integer bathroom = listings.getJSONObject(i).getInt("bathroom_number");
-	    		//Integer bedroom = listings.getJSONObject(i).getInt("bedroom_number");
-	    		
-	    		
-	    		String keywords = listings.getJSONObject(i).getString("keywords");
-	    		int locationid = insertnewLocationAndReturnId(locname, loc_desc,latitude,longitude,city,state,zip);
-	    		int amenityid = insertnewAmenityandReturnId(bath, bed,loc_desc ,keywords);
-	    		int price = listings.getJSONObject(i).getInt("price");
-	    		String url = listings.getJSONObject(i).getString("img_url");
-	    		//String lister_url = listings.getJSONObject(i).getString("lister_url");
-	    		String guiid = listings.getJSONObject(i).getString("guid");
-	    		DAOProperty property = new DAOProperty();
-	    		List<Property> properties = property.findPropertythruGuiid(guiid);
-	    		
-	    		
-	    		if (properties.isEmpty())
-	    		{
-	    			property.insertNewProperty(propertyname, locationid, propertytype, amenityid, address, city, state, zip, price, url, guiid);
-	    		}
-	    		else
-	    		{
-	    			System.out.println("duplicate case");
-	    		}
+	    	try
+	        	{
+			    	Double latitude = listings.getJSONObject(i).getDouble("latitude");
+		    		Double longitude = listings.getJSONObject(i).getDouble("longitude");
+		    		String propertytype = listings.getJSONObject(i).getString("listing_type");
+		    		Geocoder geocode = new Geocoder();
+		    		Geocoder newgeo = geocode.latlong2Address(latitude, longitude);
+		    		String address = newgeo.getAddress();
+		    		String city = searchString;
+		    				/*newgeo.getCity();*/
+		    		String state = newgeo.getCountry();
+		    		String zip = newgeo.getZip();
+		    		String locname = listings.getJSONObject(i).getString("datasource_name");
+		    		String loc_desc = listings.getJSONObject(i).getString("property_type");
+		    		String propertyname = listings.getJSONObject(i).getString("title");
+		    		String bath;
+		    		String bed;
+		    		Integer bathroom, bedroom;
+		    		
+		    		try {
+		    			 bathroom = listings.getJSONObject(i).getInt("bathroom_number");
+		    			 bath = bathroom.toString();
+		    		} catch (JSONException e) {
+		    			 bath = "";
+		    		} 
+		    		try {
+		    			 bedroom = listings.getJSONObject(i).getInt("bedroom_number");
+		    			 bed = bedroom.toString();
+		    		} catch (JSONException e) {
+		    			 bed = "";
+		    		} 
+		    		
+		    		
+		    		
+		    		//Integer bathroom = listings.getJSONObject(i).getInt("bathroom_number");
+		    		//Integer bedroom = listings.getJSONObject(i).getInt("bedroom_number");
+		    		
+		    		
+		    		String keywords = listings.getJSONObject(i).getString("keywords");
+		    		int locationid = insertnewLocationAndReturnId(locname, loc_desc,latitude,longitude,city,state,zip);
+		    		int amenityid = insertnewAmenityandReturnId(bath, bed,loc_desc ,keywords);
+		    		int price = listings.getJSONObject(i).getInt("price");
+		    		String url = listings.getJSONObject(i).getString("img_url");
+		    		//String lister_url = listings.getJSONObject(i).getString("lister_url");
+		    		String guiid = listings.getJSONObject(i).getString("guid");
+		    		DAOProperty property = new DAOProperty();
+		    		List<Property> properties = property.findPropertythruGuiid(guiid);
+		    		
+		    		
+		    		if (properties.isEmpty())
+		    		{
+		    			property.insertNewProperty(propertyname, locationid, propertytype, amenityid, address, city, state, zip, price, url, guiid);
+		    		}
+		    		else
+		    		{
+		    			System.out.println("duplicate case");
+		    		}
+		    	}
+	    catch (JSONException e){System.console();};
+		    
+		    DAOProperty newprop = new DAOProperty();
+		    return newprop.findPropertybyCityandType(searchString, listing_type);
 	    	}
-	    
-	    DAOProperty newprop = new DAOProperty();
-	    return newprop.findPropertybyCityandType(searchString, listing_type);
-  }
+
 
   private int insertnewAmenityandReturnId(String bathroom, String bedroom, String loc_name, String keywords)
   {
@@ -167,15 +170,14 @@ public class Webhitter {
   }
   
   
-// public static void main(String[] args) throws IOException, JSONException 
-//  {
-//    Webhitter  web = new Webhitter();
-//    List<Property> lop = web.searchResults("http://api.nestoria.co.uk/api?action=search_listings&encoding=json&pretty=1&place_name=soho&country=uk&listing_type=buy",
-//    		"Boston");
-//    
-//    for (Property p : lop)
-//    {
-//    	System.out.println(p.getPropertyname());
-//    } 
-//  }
+ public static void main(String[] args) throws IOException, JSONException 
+  {
+    Webhitter  web = new Webhitter();
+    List<Property> lop = web.searchResults("London", "buy");
+    
+    for (Property p : lop)
+    {
+    	System.out.println(p.getPropertyname());
+    } 
+  }
 }

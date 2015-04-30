@@ -2,7 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.*" import="edu.neu.aarambh.classes.*" import="java.sql.Date.*" import= "edu.neu.aarambh.classes.User" import="edu.neu.aarambh.classes.Property" import="edu.neu.aarambh.DAO.*" import="edu.neu.aarambh.servelets.Webhitter" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -48,6 +50,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
  $("#tablediv").hide();
+ $("#formdiv123").hide();
  var userName= localStorage.getItem("userName");
  if(userName != null && userName != "")
 	{	
@@ -181,21 +184,21 @@ div#mapld {
 					<div class="banner_adds"></div>
 					<div class="menu">
 						<ul>
-							<li><a href="">Home</a>
+							<li><a href="#">Home</a>
 							<table>
 							<tr>
 							<td></td>
 							</tr>
 							</table>
 							</li>
-							<li id="login"><a href="login.jsp" target="_self">Login</a></li>
 							<li><a href="AboutUs.jsp">About Us </a></li>
-							<li><a href="Customers.jsp">Customers</a></li>
-							<li><a href="ContactUs.jsp">Contact</a></li>
+							<li><a href="Customers.jsp">Our Customers</a></li>
+							<li><a href="AllLocation.jsp">Our Locations</a></li>
+							<li><a href="ContactUs.jsp">Contact Us</a></li>
+							<li id="login"><a href="login.jsp" target="_self">Login</a></li>
 							<li id="logout" style="display:none"><a href="#LogOut" onClick="logOutUser()" id="logout">LogOut</a></li>
 							<li id = "pol" style="font:16px; weight:bold; color:white"><script>if(localStorage.getItem("userName") != null)
 								{
-								
 								document.write(localStorage.getItem("userName"));
 								}
 								else
@@ -290,14 +293,6 @@ div#mapld {
 			<br>
 			<br>
 			
-			<div id = "formdiv123" style="display:none;float: right; padding: 10px 25px 0 0;">
-			<a href="SellProperty.jsp" id="sellHm" class="nav_footer"> <b>Post Property Ad </b></a>
-			<a href="UpdateUser.jsp" id="buyHm" class="nav_footer"> <b> Update Profile </b> </a>
-			<a href="DisplayHistory.jsp" id="rentHm" class="nav_footer"><b> Display History</b></a>
-			<a href="MyProperties.jsp" id="myproperty" class="nav_footer"><b> My properties</b></a>
-			<a href="Interested.jsp" id="interested" class="nav_footer"><b> Interested</b></a>
-			</div> 
-	
 		</div>
 		</form>
   		</div>
@@ -325,6 +320,7 @@ div#mapld {
 	 Webhitter  web = new Webhitter();
 	 DAOProperty propDAO = new DAOProperty();
 	 List<Property> prop = new  ArrayList<Property>();
+	 int j =0;
    if ("create".equals (st))
    {
 	   String name;
@@ -382,6 +378,9 @@ div#mapld {
  	<thead>
  	<tr>
  		<td>
+ 			<b>No</b>
+ 		</td>
+ 		<td>
  			<b>Image</b>
  		</td>
  		<td>
@@ -405,16 +404,17 @@ div#mapld {
  		<td>
  			<b>Price</b>
  		</td>	
- 	<!-- 	<td>
+ 		<td>
  		<b>Shortlist</b>
- 		</td>  -->
+ 		</td> 
  	</tr>
  	</thead>
  	<tbody>
  	<%
     for (Property property : prop)
    		{%>
-	   <tr><td>
+	   <tr>
+	   <td><%= ++j %></td><td>
 	   		<div class="row">
   		    <div class="col-sm-6 col-md-4">
     		<div class="thumbnail" style= "width:90px; align:right">
@@ -597,14 +597,18 @@ div#mapld {
   
 </div>	
 </div>
-</body>
- <div id="footer">
-			<ul class="footer_menu">
-				<li><a href="#" class="nav_footer" style="weight:bold"> Home </a></li>
-				<li><a href="SellProperty.jsp" class="nav_footer" style="weight:bold"> Post Property Ad </a></li>
-				<li><a href="AllProperty.jsp" class="nav_footer" style="weight:bold"> Our Properties </a></li>
-				<li><a href="AllLocation.jsp" class="nav_footer" style="weight:bold"> Our Location </a></li>
-				<li><a href="#" class="nav_footer" style="weight:bold"> Contact </a></li>
+ <div id="footer" >
+ 
+			<ul class="footer_menu" id="formdiv123">
+			<li><a href="SellProperty.jsp" id="sellHm" class="nav_footer" style="weight:bold"> <b>Post Ad </b></a></li>
+			<li><a href="UpdateUser.jsp" id="buyHm" class="nav_footer" style="weight:bold"> <b> Maintain Profile </b> </a></li>
+			<li><a href="DisplayHistory.jsp" id="rentHm" class="nav_footer" style="weight:bold"><b> History</b></a></li>
+			<li><a href="MyProperties.jsp" id="myproperty" class="nav_footer" style="weight:bold"><b> Favourites</b></a></li>
+			<li><a href="Interested.jsp" id="interested" class="nav_footer" style="weight:bold"><b> Interested</b></a></li>
+			<li><a href="AllProperties.jsp" id="interested" class="nav_footer" style="weight:bold"><b> All Properties</b></a></li>
 			</ul>
-</div>
+</div> 
+</body>
+
+
 </html>
